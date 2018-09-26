@@ -1,9 +1,0 @@
-<header class="animated">
-    <nav>
-        <a href="<!--{:U('Index/index','',false)}-->" class="navigate <!--{$head=='index' ? 'active':''}-->">首页</a>
-        <a href="<!--{:U('Index/mytest','',false)}-->" class="navigate <!--{$head=='mytest' ? 'active':''}-->">我的历史</a>
-        <if condition="$channel eq 'qudao150'"><else />
-            <a href="<!--{:U('Login/index','',false)}-->" class="navigate <!--{$head=='login' ? 'active':''}-->">我的</a>
-        </if>
-    </nav>
-</header>

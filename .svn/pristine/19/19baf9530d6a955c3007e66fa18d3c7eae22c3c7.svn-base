@@ -1,9 +1,0 @@
-
-<!-- header -->
-<header class="public_header_container">
-    <nav class="public_header_nav">
-        <a href="<!--{:U('Index/index','',false)}-->" class="public_header_home"></a>
-        <h1 class="public_header_title">财商测试</h1>
-        <a href="<!--{:U('Index/mytest','',false)}-->" class="public_header_mytest">我的测算</a>
-    </nav>
-</header>
