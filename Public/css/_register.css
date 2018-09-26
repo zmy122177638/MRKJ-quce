@@ -1,0 +1,63 @@
+body{background-color:#efecec;}
+/* 身体 */
+.login_container{padding-top:0.9rem;}
+/* 用户登录 */
+.sign_container{padding:0.2rem;}
+.sign_ul{list-style: none;}    
+.sign_ul li{
+    background-color:#ffffff;
+    border-radius: 0.1rem;
+    border:1px solid #E5E5E5;
+    font-size:0;
+    height:0.8rem;
+    line-height: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+.sign_ul li input{
+    width: 100%;
+    height:100%;
+    outline-color: chocolate;
+    border: none;
+    padding:0 0.7rem;
+    font-size:0.28rem;
+    color:#656970;
+    
+    box-sizing: border-box;
+    background-color:transparent;
+}
+.sign_ul li input#username{
+    background-image: url('../images/user.png');
+    background-repeat:no-repeat;
+    background-size:0.48rem auto;
+    background-position:0.05rem center;
+}
+.sign_ul li input#password1{
+    background-image: url('../images/suo.png');
+    background-repeat:no-repeat;
+    background-size:0.48rem auto;
+    background-position:0.05rem center;
+}
+.sign_ul li input#password2{
+    background-image: url('../images/suo.png');
+    background-repeat:no-repeat;
+    background-size:0.48rem auto;
+    background-position:0.05rem center;
+}
+.sign_ul li input#phone{
+    background-image: url('../images/phone.png');
+    background-repeat:no-repeat;
+    background-size:0.48rem auto;
+    background-position:0.05rem center;
+}
+.registerBtn{
+    height:0.88rem;
+    line-height: 0.88rem;
+    background-color:#EF4E3A;
+    color:#ffffff;
+    border-radius: 0.05rem;
+    text-align: center;
+    font-size:0.32rem;
+    text-decoration: none;
+    display: block;
+    -webkit-tap-highlight-color: transparent;
+}

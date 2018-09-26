@@ -1,0 +1,50 @@
+[ 2018-09-14T09:17:38+08:00 ] ::1 /quce/index.php/Home-Index-palace?subject=QWCS21F&id=128
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: channel D:\phpStudy\WWW\quce\Application\Home\Controller\IndexController.class.php 第 270 行.
+SQL: select id,hotstar,click,type_img,subject from qc_choiceti_answer where id='128' limit 1 [ RunTime:0.148008s ]
+SQL: update qc_choiceti_answer set click='33'+1 where id='128' [ RunTime:0.000000s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given D:\phpStudy\WWW\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+NOTIC: [8] Undefined variable: zhimingArr D:\phpStudy\WWW\quce\Application\Home\Controller\IndexController.class.php 第 302 行.
+NOTIC: [2] mysql_free_result() expects parameter 1 to be resource, boolean given D:\phpStudy\WWW\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 77 行.
+SQL: insert into qc_click_order (subject,uid,channel)values('QWCS21F','','') [ RunTime:0.423025s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given D:\phpStudy\WWW\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.345019s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.345019s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-09-14T10:11:32+08:00 ] ::1 /quce/index.php/Home-Index-palace?subject=QWCS20F&id=116
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: channel D:\phpStudy\WWW\quce\Application\Home\Controller\IndexController.class.php 第 270 行.
+SQL: select id,hotstar,click,type_img,subject from qc_choiceti_answer where id='116' limit 1 [ RunTime:0.069004s ]
+SQL: update qc_choiceti_answer set click='58'+1 where id='116' [ RunTime:0.001000s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given D:\phpStudy\WWW\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+NOTIC: [8] Undefined variable: zhimingArr D:\phpStudy\WWW\quce\Application\Home\Controller\IndexController.class.php 第 302 行.
+NOTIC: [2] mysql_free_result() expects parameter 1 to be resource, boolean given D:\phpStudy\WWW\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 77 行.
+SQL: insert into qc_click_order (subject,uid,channel)values('QWCS20F','','') [ RunTime:0.053003s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given D:\phpStudy\WWW\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.075004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.075004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.012001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.012001s ]
+

@@ -1,0 +1,9 @@
+<!-- footer -->
+<footer class="public_fonter_container">
+    <div class="public_fonter_content">
+        <img src="__PUBLIC__/images/QR_core.png" width="30%" class="public_QRicon" alt="">
+        <p>长按二维码添加客服微信</p>
+        <p>在线服务时间：周一至周五9:00-18:00</p>
+        <p><small>(以上测试纯属测试本身，不作为证明任何人财商能力的依据)</small></p>
+    </div>
+</footer>

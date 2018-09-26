@@ -1,0 +1,90 @@
+<?php
+namespace Home\Controller;
+use Think\Controller;
+class interfaceController extends Controller {
+    public function index(){//首页数据接口
+        $zhimingArr=M()->query("select name,image,subject from qc_zhiming_link where type='quce' limit 8");
+        $bannerArr=M()->query("select name,image,subject from qc_zhiming_link where type='banner' ");
+        foreach($zhimingArr as $key=>$values){
+            $name=$values['name'];
+            $dataArr=M()->query("select * from qc_choiceti_answer where subject='{$values['subject']}'");
+//            $zhimingArr[$key]['image']='https://www.yixueqm.com/quce/Public/images/'.$values['image'];
+            $zhimingArr[$key]=array_filter($dataArr[0]);
+            $zhimingArr[$key]['title']=$name;
+        }
+        foreach($bannerArr as $key=>$values){
+            $dataArr=M()->query("select * from qc_choiceti_answer where subject='{$values['subject']}'");
+            $image='https://www.yixueqm.com/quce/Public/images/'.$values['image'];
+            $bannerArr[$key]=array_filter($dataArr[0]);
+            $bannerArr[$key]['image']=$image;
+        }
+        $arr['zhiming']=$zhimingArr;
+        $arr['banner']=$bannerArr;
+        echo json_encode($arr);
+    }
+    public function wxEntry(){//微信数据录入
+        $nickname=I("request.nickname");
+        $openid=I("request.openid");
+        $city=I("request.city");
+        $province=I("request.province");
+        $headimgurl=I("request.headimgurl");
+
+        if(empty($nickname)||empty($openid)||empty($headimgurl)){
+            $nickname=$_REQUEST['nickname'];
+            $openid=$_REQUEST['openid'];
+            $city=$_REQUEST['city'];
+            $province=$_REQUEST['province'];
+            $headimgurl=$_REQUEST['headimgurl'];
+            if(empty($nickname)||empty($openid)||empty($headimgurl)){
+                echo json_encode('缺少参数');exit;
+            }
+        }
+
+        cookie('uid',$openid);
+        $userArr=M()->query("select id from qc_user where  wx_openid='{$openid}' limit 1");
+        if(empty($userArr)){
+            M()->query("insert into qc_user (nickname,address,head_img,wx_openid)values(
+                                                '{$nickname}','{$province},{$city}','{$headimgurl}','{$openid}')");
+        }
+        $userArr=M()->query("select * from qc_user where  wx_openid='{$openid}' limit 1");
+        if($userArr[0]['id']){
+            echo json_encode($userArr[0]);
+        }else{
+            echo json_encode('没有数据');
+        }
+    }
+
+    public function imgMerge(){//图片合成
+        if($_REQUEST['img']){
+            $imgName=$_REQUEST['img'];
+            $title=$_REQUEST['title'];
+        }
+        // 图片一
+        $path_1 = mb_substr(THINK_PATH,0,-9)."Public/images/answer/{$imgName}";
+        // 图片二
+        $path_2 = mb_substr(THINK_PATH,0,-9)."Public/images/cs/mingli.jpg";
+        // 创建图片对象
+        $image_1 = imagecreatefrompng($path_1);
+        $image_2 = imagecreatefromjpeg($path_2);
+        // 合成图片
+        imagecopymerge($image_1, $image_2, imagesx($image_1)-710, imagesy($image_1)-120, 0, 0, imagesx($image_2), imagesy($image_2), 100);
+        // 添加文字水印
+        $black = imagecolorallocate($image_1, 80, 80, 80);
+        $red = imagecolorallocate($image_1, 150, 0, 0);
+        $font = mb_substr(THINK_PATH,0,-9).'Public/font/simhei.ttf';
+        imagettftext($image_1, 20, 0, imagesx($image_1)-600, imagesy($image_1)-40, $black, $font,"长按识别二维码，快来测测吧~");
+        imagettftext($image_1, 23, 0, imagesx($image_1)-150, imagesy($image_1)-50, $black, $font,"——知命");
+        imagettftext($image_1, 20, 0, imagesx($image_1)-600, imagesy($image_1)-80, $red, $font,"{$title}");
+
+        // 输出合成图片
+        $name=mb_substr($imgName,0,-4);
+        $returnPath=mb_substr(THINK_PATH,0,-9)."Upload/MG{$name}.png";
+        $boole=imagepng($image_1,$returnPath);
+        if($boole){
+            echo  "https://www.yixueqm.com".__ROOT__."/Upload/MG{$name}.png";
+        }else{
+            echo  '失败';
+        }
+    }
+
+}

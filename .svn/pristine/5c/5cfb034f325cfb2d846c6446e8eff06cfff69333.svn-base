@@ -1,0 +1,211 @@
+<style>
+        body{font-family:"Microsoft YaHei",Helvetica,Arial,sans-serif}
+        h2,img,p{margin:0;padding:0}
+        li,ul{list-style:none;margin:0;padding:0}
+        .warpper{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:#20190e;opacity:.8;z-index:10001;display:none}
+        .container_2weima{height:13.14em;width:80%;margin:3.7em 10% 0 10%;border:1px solid #fff;border-radius:.4285em;background:#fff;display:none;position:fixed;left:0;top:0;z-index:10002}
+        .container_2weima>span{display:inline-block;width:1.07em;height:1.07em;position:absolute;top:-1.357em;right:-.0714em;border-color:#fff;border-radius:50%}
+        .container_2weima>span>img{width:100%;height:100%}
+        .container_2weima>p{font-size:.57143em;color:#2a76c1;margin:0;line-height:1em;text-align:center}
+        .container_2weima>.title{color:#f08300;font-size:.8571em;text-align:center;margin:1.0416em 0 .6667em 0}
+        .container_2weima>.collect{margin-bottom:.625em}
+        .container_2weima>.avaliable{margin-bottom:.3125em}
+        .container_2weima>.QR{height:9.25em;width:9.25em;margin:0 auto;margin-bottom:.625em}
+        .container_2weima>.QR>img{height:100%;width:100%}
+        .container_2weima>p:nth-child(4){letter-spacing:.15em}
+        .container_2weima>p>span{color:#f08300}
+        .container_2weima>p:last-child{color:#000} 
+        .container_2weima .identify{color:#7f7f7f;font-size:0.5em;height:2.14286em;line-height:2.14286em;margin-top:-0.57143em;margin:0.42857em 0;text-align:center;}
+        .container_2weima .identify .choice{display:inline-block;width:2.14286em;height:2.14286em;}
+        .container_2weima .identify .choice>img{display:inline-block;width:1.14286em;height:1.14286em;position:relative;top:.14286em;left:0.14286em;}
+        .container_2weima #exitBtn{width:6.8em;height:2.5em;border:1px solid #f08300;background:#f08300;border-radius:5px;float:right;color:#fff;line-height:2.5em;text-align:center}
+        .container_2weima .going{width:6.8em;height:2.5em;border:1px solid #2a76c1;border-radius:5px;float:left;background:#2a76c1;color:#fff;line-height:2.5em;text-align:center}
+        .container_2weima .juge{overflow:hidden;font-size:.57143em;margin:0.5em 2.5em 0 2.5em}
+</style>
+<div class="warpper"></div>
+<div class="container_2weima">
+    <span class="closeBtn"><img src="__PUBLIC__/images/winclosebtn.png" alt="" ></span>
+    <div class="title">收藏测试</div>
+    <p class="collect"> </p>
+    <p class="avaliable">永久保存测试结果，方便再次查看</p>
+    <p class="QR"><img src="__PUBLIC__/images/QR_core.png" alt=""  ></p>
+    <div class="identify">
+        <p class="choice">
+            <img src="__PUBLIC__/images/notch.png"/>
+        </p>今日不再提醒
+    </div>
+    <div  class="juge">
+        <p class="going">继续测试</p>
+        <p id="exitBtn">确认离开</p>
+    </div>
+</div>
+<script>
+    var woquTouch = "ontouchstart" in document.documentElement ? "touchend" : "click";
+    function hasClass(elements, cName) {
+        return !!elements.className.match(new RegExp("(\\s|^)" + cName + "(\\s|$)"));
+    };
+
+    function addClass(elements, cName) {
+        if (!hasClass(elements, cName)) {
+            elements.className += " " + cName;
+        };
+    };
+
+    function removeClass(elements, cName) {
+        if (hasClass(elements, cName)) {
+            elements.className = elements.className.replace(new RegExp("(\\s|^)" + cName + "(\\s|$)"), " ");
+        };
+    };
+
+</script>
+<script>
+    (function(){
+
+       mainSize = document.body.clientWidth/414;
+       document.querySelector('.container_2weima').style.fontSize = mainSize*28 + "px";
+        var WYisShowQR = true;
+        var WYisShow = true;
+        var exitType = !1;
+        var isAlert = true;
+        //identify
+        if(window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger'){
+            document.querySelector('.collect').innerHTML = '长按识别二维码，收藏 <span>知命，</span>';
+        }else{
+            document.querySelector('.collect').innerHTML = '微信扫描二维码，收藏 <span>知命，</span>';
+        }
+        //getdate
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+            return currentdate;
+        }
+        if(window.localStorage.getItem('game248_prefix_sel_date') && (window.localStorage.getItem('game248_prefix_sel_date') == getNowFormatDate())){
+            isAlert = false;
+            window.removeEventListener('popstate',null);
+        }else{
+            isAlert = true;
+        }
+        // event
+
+        document.querySelector('.container_2weima .identify .choice').addEventListener(woquTouch,function(e){
+                e.preventDefault();
+                if(!hasClass(document.querySelector('.container_2weima .identify .choice>img'),'sel')){
+                    addClass(document.querySelector('.container_2weima .identify .choice>img'),'sel');
+                    document.querySelector('.container_2weima .identify .choice>img').setAttribute("src","__PUBLIC__/images/choice.png");
+                    isAlert = false;
+                    window.removeEventListener('popstate',null);
+                    window.localStorage.setItem('game248_prefix_sel_date',getNowFormatDate())
+                }else{
+                    removeClass(document.querySelector('.container_2weima .identify .choice>img'),'sel');
+                    document.querySelector('.container_2weima .identify .choice>img').setAttribute("src","__PUBLIC__/images/notch.png");
+                    isAlert = true;
+                    window.localStorage.removeItem('game248_prefix_sel_date');
+                }
+
+            });
+        document.querySelector('.warpper').addEventListener(woquTouch,function(e){
+                e.preventDefault();
+                document.querySelector('.container_2weima').style.display = 'none';
+                document.querySelector('.warpper').style.display = 'none';
+                pushHistory();
+            });
+        document.querySelector('.going').addEventListener(woquTouch,function(e){
+                e.preventDefault();
+                document.querySelector('.container_2weima').style.display = 'none';
+                document.querySelector('.warpper').style.display = 'none';
+                pushHistory();
+            });
+        document.querySelector('.closeBtn').addEventListener(woquTouch,function(e){
+                e.preventDefault();
+                document.querySelector('.container_2weima').style.display = 'none';
+                document.querySelector('.warpper').style.display = 'none';
+                pushHistory();
+            });
+        document.querySelector('#exitBtn').addEventListener(woquTouch,function(e){
+                e.preventDefault();
+                if(window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger'){
+                    if(window.history.length > 2){
+                        window.history.back();
+                    }else{
+                        WeixinJSBridge.call('closeWindow');
+                    }
+                }else{
+                    exitType = 1;
+                }
+                if(exitType == 1 ){
+                    document.querySelector('.container_2weima').style.display = 'none';
+                    document.querySelector('.warpper').style.display = 'none';
+                    window.removeEventListener('popstate',function(){
+                        exitType = !1;
+                    })
+                    window.history.back();
+                }
+            })
+        //store histoty
+        function pushHistory() {
+            if(isAlert){
+                var state = {
+                    title: document.title,
+                    url: location.href
+                };
+                window.history.pushState(state, document.title, location.href);
+            };
+
+        }
+        // cancel exit
+        function cancelExit(){
+
+            document.querySelector('.container_2weima .identify .choice>img').setAttribute('src','__PUBLIC__/images/notch.png');
+
+            if(hasClass(document.querySelector('.container_2weima .identify .choice>img'),'sel')){
+                removeClass(document.querySelector('.container_2weima .identify .choice>img'),'sel');
+            }
+            if(window.localStorage.getItem('game248_prefix_sel_date') && (window.localStorage.getItem('game248_prefix_sel_date') == getNowFormatDate())){
+                isAlert = false;
+                window.removeEventListener('popstate',null);
+            }else{
+                isAlert = true;
+            }
+            if(isAlert){
+                pushHistory();
+                window.addEventListener("popstate", function(e) {
+                    if(WYisShow){
+                        document.querySelector('.container_2weima').style.display = 'block';
+                        document.querySelector('.warpper').style.display = 'block';
+                    }else{
+                        WYisShow = true;
+                    }
+                }, false);
+            }
+        }
+
+        //deal with ios<7
+        var agent = navigator.userAgent.toLowerCase() ;
+        var version;
+        if(agent.indexOf("like mac os x") > 0){
+            //ios
+            var regStr_saf = /os [\d._]*/gi ;
+            var verinfo = agent.match(regStr_saf) ;
+            version = (verinfo+"").replace(/[^0-9|_.]/ig,"").replace(/_/ig,".");
+            var version_str = version+"";
+            if(version_str != "undefined" && version_str.length >0){
+                version=version.substring(0,1);
+                if(version>=8){
+                    cancelExit();
+                }
+                else{
+                   cancelExit();
+                }
+            }
+        }else{
+            cancelExit();
+        }
+    })()
+
+</script>

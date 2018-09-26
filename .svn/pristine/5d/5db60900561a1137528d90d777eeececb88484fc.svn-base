@@ -1,0 +1,441 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+html,body{
+    max-width: 1024px;
+    font-family: "microsoft yahei", sans-serif;
+    margin: 0 auto;
+}
+
+.brief-image{
+    position: relative;
+    overflow: hidden;
+    max-height: 3.36rem;
+}
+.brief-image img{
+    display: block;
+    width: 100%;
+}
+.brief-price{
+    position: absolute;
+    padding: 0 0.2rem;
+    display: block;
+    width: 100%;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+    color: #FFF;
+    font-size: 0.28rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.brief-pricenum{
+    color: #ff6073;
+    float: right;
+}
+.brief-buynow{
+    display: inline-block;
+    background-color: #ff6073;
+    color: white;
+    margin-left: 0.06rem;
+    padding: 0 0.16rem;
+    height: 0.58rem;
+    line-height: 0.58rem;
+    margin-top: 0.1rem;
+    border-radius: 0.12rem;
+    -webkit-border-radius: 0.12rem;
+    -moz-border-radius: 0.12rem;
+    -ms-border-radius: 0.12rem;
+    -o-border-radius: 0.12rem;
+}
+.brief-box{
+    padding: 0.25rem 0.2rem 0.2rem 0.2rem;
+    border-bottom: 0.18rem solid #efeff4;
+}
+.brief-box:nth-last-of-type(1){
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+}
+.brief-splite{
+    height: 0.4rem;
+    line-height: 0.4rem;
+    font-size: 0.28rem;
+    overflow: hidden;
+    margin-bottom: 0.08rem;
+}
+.brief-splite span{
+    display: inline-block;
+    background-color: #ff6073;
+    width: 0.1rem;
+    height: 0.4rem;
+    margin-right: 0.06rem;
+    float: left;
+}
+.brief-splite p{
+    display: inline-block;
+    float: left;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    color: #8d8d92;
+    padding-top: 0.04rem;
+}
+.brief-box .brief-text p{
+    font-size: 0.28rem;
+    text-indent: 2em;
+    text-align: justify;
+    line-height: 0.5rem;
+    color: #262626;
+}
+.brief-box .brief-br{
+    line-height: 0.3rem;
+}
+.brief-example{
+    text-align: center;
+    color: #ff6073;
+    margin: 0.2rem 0 0 0;
+    font-size: 0.28rem;
+}
+.brief-box .brief-floatbox{
+    font-size: 0.28rem;
+    line-height: 0.5rem;
+}
+.brief-floatbox .float-box{
+    float: right;
+    color: #ff6073;
+}
+
+.historybtnbox{
+    display: flex;
+}
+.brief-double-startbtn{
+    flex: 1;
+    -webkit-flex: 1;
+    text-align: center;
+    color: white;
+    font-size: 0.32rem;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background-color: #00C800;
+    margin: 0.2rem 0;
+    border-radius: 0.12rem;
+    margin-right: 0.1rem;
+    -webkit-border-radius: 0.12rem;
+    -moz-border-radius: 0.12rem;
+    -ms-border-radius: 0.12rem;
+    -o-border-radius: 0.12rem;
+}
+.brief-double-reportbtn{
+    flex: 1;
+    -webkit-flex: 1;
+    text-align: center;
+    color: white;
+    font-size: 0.32rem;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background-color: #ff6073;
+    margin: 0.2rem 0;
+    border-radius: 0.12rem;
+    margin-left: 0.1rem;
+    -webkit-border-radius: 0.12rem;
+    -moz-border-radius: 0.12rem;
+    -ms-border-radius: 0.12rem;
+    -o-border-radius: 0.12rem;
+}
+
+.brief-startbtn{
+    text-align: center;
+    color: white;
+    font-size: 0.32rem;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background-color: #ff6073;
+    margin: 0.2rem 0;
+    border-radius: 0.12rem;
+    -webkit-border-radius: 0.12rem;
+    -moz-border-radius: 0.12rem;
+    -ms-border-radius: 0.12rem;
+    -o-border-radius: 0.12rem;
+}
+
+/*pay confrim box*/
+.ConfirmPaybox {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    display: none;
+}
+.ConfirmPaybg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+.ConfirmPayInfo {
+    display: block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    transform:translateY(217px);
+    -webkit-transform:translateY(217px);
+    -moz-transform:translateY(217px);
+    -ms-transform:translateY(217px);
+    -o-transform:translateY(217px);
+}
+.ConfirmPay-titlebox {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 0.2rem;
+}
+.ConfirmPay-title {
+    text-align: left;
+    color: #444444;
+    font-weight: 900;
+    margin: 0.41rem 0 0.31rem 0;
+    font-size: 0.36rem;
+    line-height: 0.36rem;
+}
+.ConfirmPay-list {
+    font-size: 0.28rem !important;
+    text-align: left;
+    margin-bottom: 0.51rem;
+    line-height: 0.28rem;
+}
+.ConfirmPay-list a {
+    color: #808080;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.ConfirmPay-list span {
+    color: #9596ab;
+    text-decoration: underline;
+}
+.ConfirmPay-spliteline {
+    display: block;
+    height: 1px;
+    background-color: #EEEEEE;
+}
+.ConfirmPay-prizebox {
+    overflow: hidden;
+    padding: 0 0.2rem;
+    line-height: 1.8rem;
+}
+.ConfirmPay-prizetext {
+    float: left;
+    font-size:0.28rem;
+    color: #999999;
+}
+.ConfirmPay-prize {
+    float: right;
+    font-size: 0.84rem;
+    color: #444444;
+    font-family: helvetica;
+}
+.ConfirmPaybtnbox {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 0.2rem 0.4rem 0.2rem;
+}
+.ConfirmPaybtnbox .ConfirmPaybtn:nth-child(1){margin-bottom:0.3rem;background-color: #00C800;}
+.ConfirmPaybtn{
+    background-color: #56AAE6;
+    font-size: 0.32rem;
+    border-radius: 0.12rem;
+    height:1rem;
+    line-height: 1rem;
+    text-align: center;
+    display: block;
+    color: white;
+    -webkit-border-radius: 0.12rem;
+    -moz-border-radius: 0.12rem;
+    -ms-border-radius: 0.12rem;
+    -o-border-radius: 0.12rem;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+}
+.ConfirmPaybtn::before{
+    content:'';
+    width:0.64rem;
+    height:0.64rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right:0.3rem;
+}
+.ConfirmPaybtn:nth-child(1)::before{
+    background:url('../images/wxzf.png') no-repeat;
+    background-size:100% 100%;
+}
+.ConfirmPaybtn:nth-child(2)::before{
+    background:url('../images/zfbzf.png') no-repeat;
+    background-size:100% 100%;
+}
+.showConfirm {
+    display: block;
+}
+
+/* set gender box */
+.setgenderbox {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.7);
+    z-index: 99;
+    display: none;
+}
+.new-ceshi {
+    font-size: 0.36rem;
+    width: 89%;
+    max-width: 569px;
+    margin: 1.8rem auto 0 auto;
+    border-radius: 0.2rem;
+    background-color: #fff;
+    text-align: center;
+    z-index: 99999;
+    color: #FF7585;
+    font-family: 'microsoft yahei',sans-serif;
+    overflow: hidden;
+    -webkit-border-radius: 0.2rem;
+    -moz-border-radius: 0.2rem;
+    -ms-border-radius: 0.2rem;
+    -o-border-radius: 0.2rem;
+}
+.alerttitle {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    font-size: 0.36rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+#closebtn {
+    display: block;
+    position: absolute;
+    width: 0.48rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    right: 0.14rem;
+    top: 0.14rem;
+    font-size: 0.24rem;
+    font-weight: 700;
+}
+.splite-line{
+    position: relative;
+    margin: 0 0.4rem 0px 0.4rem;
+}
+.splite-line:after{
+    content: "";
+    width: 100%;
+    display: block;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform:scaleY(.5);
+    -webkit-transform:scaleY(.5);
+    border-bottom: 1px dashed #FF7585;
+    -moz-transform:scaleY(.5);
+    -ms-transform:scaleY(.5);
+    -o-transform:scaleY(.5);
+}
+.new-ceshi p{
+    position: relative;
+    font-size: 0.3rem;
+    display: inline-block;
+    border-radius: 0.2rem;
+    margin:0.4rem;
+    letter-spacing: 1px;
+    width: 2.4rem;
+    height: 0.76rem;
+    line-height: 0.76rem;
+    background-color: #fff;
+    color: #FF7585;
+    border: 1px solid #FF7585;
+    -webkit-border-radius: 0.2rem;
+    -moz-border-radius: 0.2rem;
+    -ms-border-radius: 0.2rem;
+    -o-border-radius: 0.2rem;
+}
+.new-ceshi .gender{
+    background-color: #FF7585;
+    color: #fff;
+}
+.new-ceshi .setGender{
+    background-color: #FF7585;
+    color: #fff;
+    margin: 0.4rem 0;
+}
+.gender-check{
+    display: inline-block;
+    position: absolute;
+    left: 60%;
+    top: 0.2rem;
+}
+.gender-check img{
+    width: 0.32rem;
+    height: 0.32rem;
+    display: block;
+}
+
+.genderbtnbox{
+    display: flex;
+}
+.genderbtn {
+    text-align: center;
+    flex: 1;
+    padding: 0.6rem 0.6rem 0.2rem 0.6rem;
+    box-sizing: border-box;
+}
+.genderbtn p {
+    display: block;
+    margin: 0;
+    width: 100%;
+}
+.gender .gender-check{
+    display: inline-block;
+}
+.setgenderbtnbox{
+    width: 50%;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.setgenderbtnbox p {
+    width: 100%;
+}
+
+
+/* animation */
+.showConfirm .ConfirmPayInfo {
+    -webkit-animation:upin 0.5s 0s 1 ease normal forwards;
+    animation: upin 0.5s 0s 1 ease normal forwards;
+}
+@keyframes upin {
+    100% {
+        transform:translateY(0);
+        -webkit-transform:translateY(0);
+        -moz-transform:translateY(0);
+        -ms-transform:translateY(0);
+        -o-transform:translateY(0);
+    }
+}
+.bouncein {
+    -webkit-animation: bounceIn .5s .2s ease both;
+    -moz-animation: bounceIn .5s .2s ease both;
+}
+@-webkit-keyframes bounceIn{
+    0%{opacity:0;-webkit-transform:scale(.3)}
+    100%{opacity:1;-webkit-transform:scale(1)}
+}

@@ -1,0 +1,359 @@
+[ 2018-07-06T11:28:13+08:00 ] ::1 /quce/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003781s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.039535s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.039644s ]
+NOTIC: [8] Undefined index: channel G:\php\quce\Application\Home\Controller\IndexController.class.php 第 33 行.
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select title,subject from qc_choiceti_answer where id>1 order by id desc limit 5 [ RunTime:0.019231s ]
+SQL: select name,type from qc_choiceti_type where id>0 order by sort  [ RunTime:0.012266s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000199s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000260s ]
+NOTIC: [8] Undefined variable: zhimingArr G:\php\quce\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 57 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.066257s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.066334s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.010365s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.010455s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.014898s ]
+INFO: [ app_end ] --END-- [ RunTime:0.014992s ]
+
+[ 2018-07-06T11:28:15+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswer?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000722s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001022s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001129s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where  id>0 and title_img is not null order by sort_hot desc limit 0,10 [ RunTime:0.019439s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001390s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001518s ]
+
+[ 2018-07-06T11:28:16+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswerNew?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000683s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000984s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001081s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where id>0 and title_img is not null order by sort_new desc limit 0,10  [ RunTime:0.002755s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001765s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001986s ]
+
+[ 2018-07-06T11:28:22+08:00 ] ::1 /quce/index.php/Home-Login-index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000548s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000896s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000988s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000080s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000150s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.020758s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.020839s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000728s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000797s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001071s ]
+
+[ 2018-07-06T11:28:27+08:00 ] ::1 /quce/index.php/Home-Index-index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000689s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001919s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002005s ]
+NOTIC: [8] Undefined index: channel G:\php\quce\Application\Home\Controller\IndexController.class.php 第 33 行.
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select title,subject from qc_choiceti_answer where id>1 order by id desc limit 5 [ RunTime:0.001266s ]
+SQL: select name,type from qc_choiceti_type where id>0 order by sort  [ RunTime:0.001257s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000193s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000257s ]
+NOTIC: [8] Undefined variable: zhimingArr G:\php\quce\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 57 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.029698s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.029773s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001790s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001877s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001079s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001176s ]
+
+[ 2018-07-06T11:28:29+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswerNew?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000642s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001025s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001129s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where id>0 and title_img is not null order by sort_new desc limit 0,10  [ RunTime:0.002840s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001425s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001513s ]
+
+[ 2018-07-06T11:28:30+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswer?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000705s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001594s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001738s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where  id>0 and title_img is not null order by sort_hot desc limit 0,10 [ RunTime:0.002657s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001390s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001481s ]
+
+[ 2018-07-06T16:15:24+08:00 ] ::1 /quce/index.php/Home-Index-palace?subject=zhiming1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003223s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.013549s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.013649s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,hotstar,click,type_img from qc_choiceti_answer where subject='zhiming1' limit 1 [ RunTime:0.002725s ]
+SQL: update qc_choiceti_answer set click='8'+1 where id='72' [ RunTime:0.001615s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+NOTIC: [2] mysql_free_result() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 77 行.
+SQL: select link from qc_zhiming_link where subject='zhiming1' [ RunTime:0.046089s ]
+SQL: insert into qc_click_order (subject,uid,channel)values('zhiming1','123456','qudao148') [ RunTime:0.037059s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+NOTIC: [2] mysql_free_result() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 77 行.
+SQL: select id from qc_free_order where subject='zhiming1' and uid='123456' limit 1 [ RunTime:0.049559s ]
+SQL: select id from qc_free_order where uid='123456' order by id desc limit 1 [ RunTime:0.001366s ]
+SQL: delete from qc_free_order where subject='zhiming1' and uid='123456' [ RunTime:0.056553s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+NOTIC: [2] mysql_free_result() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 77 行.
+SQL: insert into qc_free_order (subject,uid)values('zhiming1','123456') [ RunTime:0.001172s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000204s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000283s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.093621s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.093715s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003864s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003928s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.007879s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007967s ]
+
+[ 2018-07-06T16:52:29+08:00 ] ::1 /quce/index.php/Home-Index-index?channel=qudao150
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000618s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.045942s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046036s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select * from qc_zhiming_link where type='zhiming' and id<=8 [ RunTime:0.017894s ]
+
+[ 2018-07-06T16:54:20+08:00 ] ::1 /quce/index.php/Home-Index-index?channel=qudao150
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000599s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004671s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004779s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select * from qc_zhiming_link where type='zhiming' and id<=8 [ RunTime:0.001546s ]
+
+[ 2018-07-06T16:54:29+08:00 ] ::1 /quce/index.php/Home-Index-index?channel=qudao150
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000553s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004620s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004739s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select * from qc_zhiming_link where type='zhiming' and id<=8 [ RunTime:0.001488s ]
+SQL: select title,subject from qc_choiceti_answer where id>1 order by id desc limit 5 [ RunTime:0.030330s ]
+SQL: select name,type from qc_choiceti_type where id>0 order by sort  [ RunTime:0.021703s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000252s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000319s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.061408s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.061508s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.014695s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.014786s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.010036s ]
+INFO: [ app_end ] --END-- [ RunTime:0.010255s ]
+
+[ 2018-07-06T16:54:31+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswer?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000105s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000953s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001059s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001156s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where  id>0 and title_img is not null order by sort_hot desc limit 0,10 [ RunTime:0.020376s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001137s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001242s ]
+
+[ 2018-07-06T16:54:32+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswerNew?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000653s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001278s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001411s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where id>0 and title_img is not null order by sort_new desc limit 0,10  [ RunTime:0.002851s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.007275s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007364s ]
+
+[ 2018-07-06T16:56:50+08:00 ] ::1 /quce/index.php/Home-Index-index?channel=qudao150
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000602s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.006260s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006384s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select * from qc_zhiming_link where type='zhiming' and id<=8 [ RunTime:0.001426s ]
+SQL: select title,subject from qc_choiceti_answer where id>1 order by id desc limit 5 [ RunTime:0.001451s ]
+SQL: select name,type from qc_choiceti_type where id>0 order by sort  [ RunTime:0.001306s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000190s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000250s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017357s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017425s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002326s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002414s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001049s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001139s ]
+
+[ 2018-07-06T16:56:52+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswer?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000560s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000852s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000938s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where  id>0 and title_img is not null order by sort_hot desc limit 0,10 [ RunTime:0.002689s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001343s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001433s ]
+
+[ 2018-07-06T16:56:53+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswerNew?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000656s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000843s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000924s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where id>0 and title_img is not null order by sort_new desc limit 0,10  [ RunTime:0.003271s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001335s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001423s ]
+
+[ 2018-07-06T16:56:57+08:00 ] ::1 /quce/index.php/Home-Index-palace?subject=zhiming1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000647s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000902s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000998s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,hotstar,click,type_img from qc_choiceti_answer where subject='zhiming1' limit 1 [ RunTime:0.001559s ]
+SQL: update qc_choiceti_answer set click='9'+1 where id='72' [ RunTime:0.049774s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+NOTIC: [2] mysql_free_result() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 77 行.
+SQL: select link from qc_zhiming_link where subject='zhiming1' [ RunTime:0.001282s ]
+SQL: insert into qc_click_order (subject,uid,channel)values('zhiming1','123456','qudao150') [ RunTime:0.030280s ]
+NOTIC: [2] mysql_num_rows() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 106 行.
+NOTIC: [2] mysql_free_result() expects parameter 1 to be resource, boolean given G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 77 行.
+SQL: select id from qc_free_order where subject='zhiming1' and uid='123456' limit 1 [ RunTime:0.016274s ]
+SQL: select id from qc_free_order where uid='123456' order by id desc limit 1 [ RunTime:0.001287s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000199s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000270s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031738s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031831s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000824s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000897s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001088s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001174s ]
+
+[ 2018-07-06T16:57:04+08:00 ] ::1 /quce/index.php/Home-Index-index?channel=qudao159
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000738s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001985s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002178s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select title,subject from qc_choiceti_answer where id>1 order by id desc limit 5 [ RunTime:0.001433s ]
+SQL: select name,type from qc_choiceti_type where id>0 order by sort  [ RunTime:0.001517s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000196s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000275s ]
+NOTIC: [8] Undefined variable: channel G:\php\quce\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 57 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017480s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017573s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001792s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001877s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001546s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001669s ]
+
+[ 2018-07-06T16:57:06+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswerNew?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000718s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001026s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001148s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where id>0 and title_img is not null order by sort_new desc limit 0,10  [ RunTime:0.002723s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.008666s ]
+INFO: [ app_end ] --END-- [ RunTime:0.008809s ]
+
+[ 2018-07-06T16:57:07+08:00 ] ::1 /quce/index.php/Home-Index-indexAnswer?page=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000701s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001002s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001115s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead G:\php\quce\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: select id,title,content,subject,title_img,hotstar,type_img from qc_choiceti_answer where  id>0 and title_img is not null order by sort_hot desc limit 0,10 [ RunTime:0.002531s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001106s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001193s ]
+

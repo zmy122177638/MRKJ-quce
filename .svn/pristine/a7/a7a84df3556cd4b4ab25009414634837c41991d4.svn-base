@@ -1,0 +1,50 @@
+<style>
+    .public_header_container{}
+    .public_header_nav{
+        box-sizing: border-box;
+        position: relative;
+        border: 1px solid #f6f6f6;
+    }
+    .public_header_nav .public_header_home{
+        display: block;
+        width:0.88rem;
+        height:0.88rem;
+        background: url('__PUBLIC__/images/public/top_icon_homepage.png') center no-repeat;
+        background-size:0.48rem;
+        position: absolute;
+        left:0;top:0;
+    }
+    .public_header_nav .public_header_title{
+        text-align: center;
+        font-family: PingFang-SC-Medium;
+        font-size: 0.4rem;
+        font-weight: 400;
+        color: #333333;
+        padding: 0 1rem;
+        height:0.88rem;
+        line-height: 0.88rem;
+    }
+    .public_header_nav .public_header_mytest{
+        font-size:0.28rem;
+        text-decoration: none;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        border: 1px solid #DB4852;
+        border-radius: 0.1rem;
+        padding: 0 0.1rem;
+        color: #DB4852;
+        margin-right:0.2rem;
+        position: absolute;
+        top:50%;
+        right:0;
+        margin-top:-0.25rem;
+    }
+</style>
+<!-- header -->
+<header class="public_header_container">
+    <nav class="public_header_nav">
+        <a href="" class="public_header_home"></a>
+        <h1 class="public_header_title">财商测试</h1>
+        <a href="" class="public_header_mytest">我的测算</a>
+    </nav>
+</header>

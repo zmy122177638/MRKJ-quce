@@ -1,0 +1,85 @@
+
+
+// 开始分析
+function startConstellationFX(nodeId){
+    $('.index_container').hide();
+    $('.result_img_container').hide();
+    stopPlayHandCartoon();
+    $('.loadingBox').show();
+    $('.result').show();
+    $(nodeId).show();
+    playhtml2Canvas(nodeId);
+}
+// 调用Html2Canvas
+function playhtml2Canvas(nodeId){
+    var width = document.querySelector(nodeId).clientWidth;
+    var height = document.querySelector(nodeId).clientHeight;
+    console.log(width,height)
+    var scaleBy = 2; 
+    var canvas = document.createElement("canvas");
+    canvas.width = width * scaleBy;
+    canvas.height = height * scaleBy;
+    var context = canvas.getContext("2d");
+    context.scale(scaleBy, scaleBy);
+    html2canvas($(nodeId)[0], {
+        allowTaint: false,
+        taintTest: true,
+        useCORS:true,
+        canvas: canvas,
+        onrendered: function(canvas) {
+            canvas.id = "mycanvas";
+            // document.body.appendChild(canvas);
+            // 生成base64图片数据
+            var dataUrl = canvas.toDataURL('image/png');
+            document.querySelector('.result_img').src=dataUrl;
+            $('.loadingBox').hide()
+            $(nodeId).hide();
+            $('.result_img_container').show();
+            playCartoonHand();
+        },
+    }); 
+}
+
+
+var cartoonFlag = 0;
+var isHandCartoonPlay = false;
+var playCartoonHandTimer1;
+var playCartoonHandTimer2;
+function playCartoonHand() {
+    if(isHandCartoonPlay){
+        return false;
+    }
+    isHandCartoonPlay = true;
+    var oCartoonPages = document.getElementsByClassName('zwfy-report-cartoon');
+    var box = document.getElementsByClassName('zwfy-report-cartoonBox')[0];
+    box.style.display = 'block';
+    playCartoonHandTimer1 = setInterval(function(){
+        for (var i = 0; i < oCartoonPages.length; i++) {
+            oCartoonPages[i].setAttribute("class", "zwfy-report-cartoon");
+        }
+        oCartoonPages[cartoonFlag].setAttribute("class", "zwfy-report-cartoon zwfy-report-cartoon-active");
+        cartoonFlag++;
+        if (cartoonFlag == 3) {
+            cartoonFlag = 0;
+        }
+    },200)
+    playCartoonHandTimer2 = setTimeout(function(){
+        clearInterval(playCartoonHandTimer1);
+        playCartoonHandTimer = null;
+        stopPlayHandCartoon();
+        isHandCartoonPlay = false;
+    },5000)
+}
+
+function stopPlayHandCartoon(){
+    isHandCartoonPlay = false;
+
+    clearInterval(playCartoonHandTimer1);
+    playCartoonHandTimer1 = null;
+
+    clearTimeout(playCartoonHandTimer2);
+    playCartoonHandTimer2 = null;
+
+    var box = document.getElementsByClassName('zwfy-report-cartoonBox')[0];
+    box.style.display = 'none';
+}

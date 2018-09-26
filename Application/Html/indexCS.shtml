@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>有趣的测算</title>
+    <script> (function(designWidth, maxWidth) {
+            var doc = document,
+            win = window,
+            docEl = doc.documentElement,
+            remStyle = document.createElement("style"),
+            tid;
+
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                maxWidth = maxWidth || 540;
+                width>maxWidth && (width=maxWidth);
+                var rem = width * 100 / designWidth;
+                remStyle.innerHTML = 'html{font-size:' + rem + 'px;}';
+            }
+
+            if (docEl.firstElementChild) {
+                docEl.firstElementChild.appendChild(remStyle);
+            } else {
+                var wrap = doc.createElement("div");
+                wrap.appendChild(remStyle);
+                doc.write(wrap.innerHTML);
+                wrap = null;
+            }
+            //要等 wiewport 设置好后才能执行 refreshRem，不然 refreshRem 会执行2次；
+            refreshRem();
+
+            win.addEventListener("resize", function() {
+                clearTimeout(tid); //防止执行两次
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+
+            win.addEventListener("pageshow", function(e) {
+                if (e.persisted) { // 浏览器后退的时候重新计算
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+
+            if (doc.readyState === "complete") {
+                doc.body.style.fontSize = "16px";
+            } else {
+                doc.addEventListener("DOMContentLoaded", function(e) {
+                    doc.body.style.fontSize = "16px";
+                }, false);
+            }
+        })(750, 750);</script>
+    <!--[if lt IE 9]>  
+        <script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+        <script src="https://cdn.bootcss.com/respond./quce/Public/js/1.4.2/respond.min.js"></script>    
+    <![endif]-->
+    <link rel="stylesheet" href="/quce/Public/css/common.css">
+    <script src="/quce/Public/js/vue.min.js"></script>
+    <script src="/quce/Public/js/jquery.min.js"></script>
+    <style>
+        *{margin:0;padding:0;}
+        body{width:100%;font-family:"PingFang SC";color:#333333;}
+        .Palace_wrap{
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(4,calc(100% / 4));
+            grid-row-gap: 0.2rem;
+            justify-items: center;
+            padding:0.2rem 0;
+        }
+        .Palace_wrap li{
+            overflow: hidden;
+            width:100%;
+            padding:0 0.1rem;
+            box-sizing: border-box;
+        }
+        .Palace_item{
+            text-decoration: none;
+            color:#333333;
+            display: block;
+            -webkit-tap-highlight-color: transparent;
+        }
+        figure{
+            text-align: center;
+        }
+        .Palace_img{
+            border-radius: 0.24rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            vertical-align: middle;
+        }
+        .Palace_name{
+            font-size:0.24rem;
+            text-align: center;
+            font-weight: 400;
+            margin-top:0.15rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width:100%;
+        }
+        .tab{padding: 0.2rem;border-bottom:0.1rem solid #f0f0f0;display: flex;}
+        .navigatetwo{
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            border: 0.01rem solid #ff7585;
+            color:#333333;
+            padding:0.15rem 0;
+            font-size:0.24rem;
+            background-color:#ffffff;
+            outline: none;
+        }
+        .curr{
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            border: 0.01rem solid #ff7585;
+            color:#ffffff;
+            padding:0.15rem 0;
+            font-size:0.24rem;
+            background-color:#ff7585;
+            outline: none;
+        }
+        .Hot_item{
+            -webkit-tap-highlight-color: transparent;
+            text-decoration: none;
+            padding:0.2rem;
+            display: flex; 
+            justify-content: space-between;
+            align-items: center;
+        }
+        .H_left{
+            display:flex;
+            align-items: center;
+        }
+        img{width:1.2rem;height:1.2rem;border-radius: 0.24rem;vertical-align: middle;}
+        .H_center{
+            display: flex;
+            flex-direction: column;
+            padding-left:0.2rem;
+            width:4rem;
+        }
+        .H_title{
+            font-size:0.28rem;
+            margin-bottom: 0.1rem;
+            color:#333333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow:ellipsis;
+        }
+        .H_hot{margin-bottom: 0.1rem;}
+        .H_hot::before{
+            content: "";
+            width:2rem;
+            height:0.42rem;
+            vertical-align: middle;
+            background:url('/quce/Public/images/star.png') no-repeat;
+            background-position: 0px -2rem;
+            background-size:2rem;
+            display: inline-block;
+        }
+        .H_hot span{font-size:0.24rem;color:#9b9b9b;margin-left:0.1rem;} 
+        .H_direction{
+            font-size:0.24rem;color:#9b9b9b;
+            width:100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow:ellipsis;
+        }
+        .H_right{}
+        .navigate_btn{
+            display: block;
+            width:1.08rem;
+            height:0.46rem;
+            line-height: 0.46rem;
+            text-decoration: none;
+            font-size:0.24rem;
+            color: #ff7585;
+            text-align: center;
+            border: 1px solid #ff7585;
+            border-radius:0.05rem;
+            background-color: #ffffff;
+            outline: none;
+        }
+        .navigate_btn span{font-size:0.32rem;}
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+        <header>
+    <nav>
+                    <a href="/quce/index.php/Home/Index/index" class="navigate active">首页</a>
+            <a href="/quce/index.php/Home/Index/login" class="navigate">我的</a>
+    </nav>
+</header>
+
+        <section>
+            <div class="Palace">
+                <ul class="Palace_wrap">
+                    <li><a href="https://hy.yixueqm.com/zhiming/index.php/Home-Bzjp-index" class="Palace_item" target="_blank">
+                            <figure><img src="/quce/Public/images/public/09.png" class="Palace_img"></figure>
+                            <h3 class="Palace_name">八字精批</h3>
+                        </a></li><li><a href="https://hy.yixueqm.com/zhiming/index.php/Home-Bzhh-index" class="Palace_item" target="_blank">
+                            <figure><img src="/quce/Public/images/public/03.png" class="Palace_img"></figure>
+                            <h3 class="Palace_name">八字合婚</h3>
+                        </a></li><li><a href="https://hy.yixueqm.com/zhiming/index.php/Home-Zwds-index" class="Palace_item" target="_blank">
+                            <figure><img src="/quce/Public/images/public/04.png" class="Palace_img"></figure>
+                            <h3 class="Palace_name">一生运势</h3>
+                        </a></li><li><a href="https://hy.yixueqm.com/zhiming/index.php/Home-Lnyc-index" class="Palace_item" target="_blank">
+                            <figure><img src="/quce/Public/images/public/06.png" class="Palace_img"></figure>
+                            <h3 class="Palace_name">2018流年运程</h3>
+                        </a></li><li><a href="https://hy.yixueqm.com/zhiming/index.php/Home-Hyzs-index" class="Palace_item" target="_blank">
+                            <figure><img src="/quce/Public/images/public/08.png" class="Palace_img"></figure>
+                            <h3 class="Palace_name">婚缘走势</h3>
+                        </a></li><li><a href="https://hy.yixueqm.com/zhiming/index.php/Home-Bzsy-index" class="Palace_item" target="_blank">
+                            <figure><img src="/quce/Public/images/public/02.png" class="Palace_img"></figure>
+                            <h3 class="Palace_name">八字事业</h3>
+                        </a></li><li><a href="https://hy.yixueqm.com/zhiming/index.php/Home-Bzcy-index" class="Palace_item" target="_blank">
+                            <figure><img src="/quce/Public/images/public/01.png" class="Palace_img"></figure>
+                            <h3 class="Palace_name">八字财运</h3>
+                        </a></li><li><a href="https://hy.yixueqm.com/zhiming/index.php/Home-Xmcs-index" class="Palace_item" target="_blank">
+                            <figure><img src="/quce/Public/images/public/12.png" class="Palace_img"></figure>
+                            <h3 class="Palace_name">姓名测算</h3>
+                        </a></li>                </ul>
+            </div>
+        </section>
+        <section>
+            <div class="major">
+                <div class="tab">
+                    <button :class="currtab==0?'curr':'navigatetwo'"  @click="setTapEvent(0)">最热</button>
+                    <button :class="currtab==1?'curr':'navigatetwo'"  @click="setTapEvent(1)">最新</button>
+                </div>
+                <!-- 最火 -->
+                <ul v-if="currtab==0">
+                    <li v-for="item in HottestData" :key="item.id" >
+                        <a :href="subject+'?subject='+item.subject" class="Hot_item" >
+                            <div class="H_left">
+                                <figure><img :src="'/quce/Public/images/quce/'+item.title_img" alt=""></figure>
+                                <div class="H_center">
+                                    <p class="H_title">{{item.title}}</p>
+                                    <p class="H_hot"><span>{{item.hotStar}} 万人在测</span></p>
+                                    <p class="H_direction">{{item.content}}</p>
+                                </div>
+                            </div>
+                            <div class="H_right">
+                                <button class="navigate_btn">去测 ></button>
+                            </div>
+                        </a>
+                    </li>
+                </ul> 
+
+                <!-- 最新 -->
+                <ul v-if="currtab==1">
+                    <li v-for="item in NewesttData" :key="item.id" >
+                        <a :href="subject+'?subject='+item.subject" class="Hot_item" >
+                            <div class="H_left">
+                                <figure><img :src="'/quce/Public/images/quce/'+item.title_img" alt=""></figure>
+                                <div class="H_center">
+                                    <p class="H_title">{{item.title}}</p>
+                                    <p class="H_hot"><span>{{item.hotStar}} 万人在测</span></p>
+                                    <p class="H_direction">{{item.content}}</p>
+                                </div>
+                            </div>
+                            <div class="H_right">
+                                <button class="navigate_btn">去测 ></button>
+                            </div>
+                        </a>
+                    </li>
+                </ul> 
+            </div>
+        </section>
+    </div>
+    <script>
+        
+        // var HottestData = [
+        //     {id:'1',url:'/chartCS',imgPath:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3389767249,1940293781&fm=27&gp=0.jpg',title:'深度个人占星',hotStar:"19.2",direction:'个人星盘分析，透彻解读你的命运！'},
+        //     {id:'2',url:'/chartCS',imgPath:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3389767249,1940293781&fm=27&gp=0.jpg',title:'深度个人占星',hotStar:"19.2",direction:'个人星盘分析，透彻解读你的命运！'},
+        //     {id:'3',url:'/chartCS',imgPath:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3389767249,1940293781&fm=27&gp=0.jpg',title:'深度个人占星',hotStar:"19.2",direction:'个人星盘分析，透彻解读你的命运！'},
+        // ]
+
+        // var NewesttData = [
+        //     {id:'1',url:'/chartCS',imgPath:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3389767249,1940293781&fm=27&gp=0.jpg',title:'深度个人占星',hotStar:"19.2",direction:'个人星盘分析，透彻解读你的命运！'},
+        //     {id:'2',url:'/chartCS',imgPath:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3389767249,1940293781&fm=27&gp=0.jpg',title:'深度个人占星',hotStar:"19.2",direction:'个人星盘分析，透彻解读你的命运！'},
+        // ]
+        var subject="/quce/index.php/Home/Index/palace";
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                currtab:0,
+                HottestData:[],
+                NewesttData:[],
+                subject:subject
+            },
+            mounted(){
+                this.getsubjectData();
+            },
+            methods:{
+                setTapEvent(index){
+                    this.currtab = index;
+                },
+                getsubjectData(){
+                    var _self = this;
+                    $.get("/quce/index.php/Home/Index/indexAnswer",function(data){
+                        var data = JSON.parse(data);
+                        _self.HottestData = data;
+                        _self.NewesttData = data;
+                        console.log(data)
+                    })
+                },
+            }
+        })
+    </script>
+  </body>
+</html>

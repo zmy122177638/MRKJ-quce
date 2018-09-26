@@ -1,0 +1,122 @@
+<?php
+namespace Home\Controller;
+use Think\Controller;
+class ZodiacController extends Controller {
+    public function zodiacIndex(){//生效运势
+        $this->display("Zodiac/zodiac");
+    }
+    public function zodiacYs(){
+        $zodiac=$_REQUEST['zodiac'];
+        $arr=M()->query("select * from qc_shengxiao_yunshi where name='{$zodiac}'");
+        $this->assign("arr",$arr[0]);
+        $this->display("Zodiac/zodiac_ys");
+    }
+    public function zodiacPeidui(){
+        $this->display("Zodiac/zodiac_peidui");
+    }
+    public function zodiacPeiduiObtain(){//生肖配对数据获取
+        $male='男'.$_REQUEST['male'];
+        $female='女'.$_REQUEST['female'];
+        $shengxiaoArr=M()->query("select * from qc_shengxiao_pair where male_name='{$male}' and female_name='{$female}'");
+        echo json_encode($shengxiaoArr[0]);
+    }
+
+    public function xzpeidui(){//星座配对
+        $this->display("Zodiac/xzpeidui");
+    }
+    public function xzpeiduiObtain(){//星座配对数据获取
+        $male=$_REQUEST['male'];
+        $female=$_REQUEST['female'];
+        $constellationArr=M()->query("select * from qc_constellation_peidui where male='{$male}' and female='{$female}' limit 1");
+        echo json_encode($constellationArr[0]);
+    }
+
+    public function namepd(){//姓名配对
+        $this->display("Zodiac/namepd");
+    }
+    public function namepdObtain(){//姓名配对数据获取
+        $bihua=$_REQUEST['bihua'];
+        $bihua=$bihua%23;
+        if($bihua==0)$bihua=23;
+        $xingmingArr=M()->query("select * from qc_xingming_peidui where id='{$bihua}'");
+        echo json_encode($xingmingArr[0]);
+    }
+    public function newnamenum(){//笔画配对
+        $this->display("Zodiac/newnamenum");
+    }
+    public function newnamenumObtain(){//笔画配对数据获取
+        $bihua=$_REQUEST['bihua'];
+        $bihuaDatax=array(
+            '亲密无间','永远和你在一起','水火不兼容','知心朋友','心上人','帮你做事的人','帮你的人','面和心不合','男女关系不正常','情投意合',
+            '关系马虎','尊敬你的人','爱你的人','适合你的人','说你坏话的人','克星','救星','忠心的人','狼心狗肺的人','单相思',
+            '山盟海誓','情敌','服从你的人','永远在一起','伴终生','恨你又爱你'
+        );
+        $bihuaDatay=array(
+            '一般关系','心上人','唯一的爱','青梅竹马','永远在一起','爱的发狂','用心的爱','性格温柔','有第三者','你太蠢',
+            '永远纯真的爱','不能爱你','非常喜欢你','癞蛤蟆想吃天鹅肉','亲密无间','很好的一对','两厢情愿','常相思','如胶似漆','白头到老',
+            '没有爱情','纯真的爱情','会结合','甜蜜的生活','爱情的结合','离不开你','迟早分离','不能没有你','不能失去你','一刀两断','第一次爱你'
+        );
+        $number=count($bihuaDatax);
+        $bihua=$bihua%$number;
+        echo json_encode($bihuaDatax[$bihua]);
+    }
+    public function zgjm(){//周公解梦
+        $this->display("Zodiac/zgjm");
+    }
+    public function zgjmSelect(){//周公解梦查询
+        $data=$_REQUEST['data'];
+        if($data){
+            $zgjmArr=M()->query("select name,text from qc_zgjm_data where name like '%{$data}%' limit 5");
+            foreach($zgjmArr as $key=>$value){
+                $value['text'] = str_replace(array("\r\n", "\r", "\n"), "",$value['text']);
+                $strArr=explode('<br>',$value['text']);
+                $strArr=array_filter($strArr);
+                $zgjmArr[$key]['text']=$strArr;
+                $zgjmArr[$key]['zid']=$key;
+            }
+            //dump($zgjmArr);
+            echo json_encode($zgjmArr);
+        }else{
+            echo '传的值为空';
+            dump($_REQUEST);
+        }
+
+    }
+    public function xzYunshi(){//星座运势
+        $this->display("Zodiac/constellation_ys");
+    }
+    public function xzYunshiObtainRi(){//获取星座日运势
+        $ymd=$_REQUEST['ymd'];
+        $stars=$_REQUEST['stars'];
+        cookie('stars',$stars);
+
+        $y=mb_substr(cookie('zymd'),0,4);//年
+        $m=mb_substr(cookie('zymd'),5,2); //月
+        $d=mb_substr(cookie('zymd'),8,2);//日
+        $arr=array('白羊'=>1,'金牛'=>2,'双子'=>3,'巨蟹'=>4,'狮子'=>5,'处女'=>6,'天秤'=>7,'天蝎'=>8,'射手'=>9,'摩羯'=>10,'水瓶'=>10,'双鱼'=>12,);
+        $id=($m*$d+$y+$arr[$stars])%109;
+        if($id==0)$id=1;
+        $riArr=M()->query("select * from qc_constellation_ri where id='{$id}'");
+        echo json_encode($riArr[0]);
+    }
+    public function xzYunshiObtainZhou(){//获取星座周运势
+        $ymd=date('Y-m-d');
+        $stars=cookie('stars');
+        $y=mb_substr($ymd,0,4);//年
+        $m=mb_substr($ymd,5,2); //月
+        $d=mb_substr($ymd,8,2);//日
+        $arr=array('白羊'=>1,'金牛'=>2,'双子'=>3,'巨蟹'=>4,'狮子'=>5,'处女'=>6,'天秤'=>7,'天蝎'=>8,'射手'=>9,'摩羯'=>10,'水瓶'=>10,'双鱼'=>12,);
+        $week=date('W');
+        $id=($arr[$stars]*$week+$y)%109;
+        if($id==0)$id=1;
+        $zhouArr=M()->query("select * from qc_constellation_zhou where id='{$id}'");
+        echo json_encode($zhouArr[0]);
+    }
+    public function xzYunshiObtainYue(){//获取星座月运势
+        $stars=cookie('stars');
+        $m=date('m'); //月
+        $monthArr=M()->query("select * from qc_constellation_month where name='{$stars}' and month={$m}");
+        echo json_encode($monthArr[0]);
+
+    }
+}

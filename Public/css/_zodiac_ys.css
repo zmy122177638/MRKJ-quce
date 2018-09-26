@@ -1,0 +1,246 @@
+*{margin:0;padding:0;}
+body,html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: #94a6ba;
+}
+.zodiac_item{
+    display:none;
+}			
+.head-container{
+    margin-top: 0.2rem;
+    color: #00adc1;
+    display: flex;
+    align-items: center;
+    padding:0 0.1rem;
+}
+.head-img {
+    height: 1.2rem;
+    width: auto;
+    margin-right: 0.2rem;
+}
+.head-title-wrap{
+    
+}
+
+
+.head-title strong {	
+    font-size: 0.44rem;
+}
+.head-desc {
+    margin-left: 0px;
+}
+    
+.head-change{
+  display: block;
+  width: 1.2rem;
+  margin: 0 0.06rem;
+}
+
+.btn-container {
+    margin-top: 0.2rem;
+    width: 100%;
+    display: table;
+    position: relative;
+}
+.col-xs-3 {
+    width: 25%;
+    float: left;
+    text-align: center;
+}
+.btn-item{-webkit-tap-highlight-color: transparent;}
+.btn-item img {
+    width: 95%;
+}
+.btn-active{
+    width: 95%;
+    height: 0.06rem;
+    background-color: #00ADC1;
+    position: relative;
+    left: 2.5%;
+    top: 0.04rem;
+}
+.no-active{
+    width: 99%;
+    border: none;
+    height: 1px;
+    background-color: #94a6ba;
+}
+.active-ztys{
+    background-color: #00ADC1;
+    display:none;
+}
+
+.active-ysxj{
+    background-color: #9BC53F;
+    display:none;
+}
+.active-sxys{
+     background-color: #F2A91C;
+    display:none; 	
+}
+.active-month{
+  background-color: #F87C4B;
+    display:none; 		
+}
+/* alert */
+.alert-containner{
+  display: none;
+}
+.mask-elert{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  background-color: #000;
+  opacity: 0.8;
+  text-align: center;
+  z-index: 100;
+  
+}
+
+.alert-main{
+  position: absolute;
+  top: 20%;
+  width: 90%;
+  left: 5%;
+  min-height: 30%;
+  z-index: 200;
+  background-color: #fff;
+  
+}
+
+.alert-head{
+  width: 100%;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  background-color: #F2A91C;
+  color: #fff;
+  z-index: 200;
+  text-align: center;
+}
+.alert-content{
+  width: 90%;
+  margin: auto;
+  padding: 10% 5%;
+  color: #B4B3B3;
+  text-align: center;
+}
+
+.alert-btn{
+  width: 60%;
+  margin: auto;
+  color: #fff;
+  background-color: #F2A91C;
+  text-align: center;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+.main-container{
+	width: 98%;
+    margin: auto;
+    padding-bottom:0.2rem;
+}
+.analys-item{
+	margin: 0.2rem 0;	
+	display: table;
+	width: 100%;
+	border-bottom: 1px dashed;
+    padding-bottom: 0.1rem;
+    overflow: hidden;	
+}
+.analys-item:last-child{
+    border:none;
+    margin:0;
+}
+.mian-con2{
+    margin-bottom:0.4rem;
+    
+}
+.item-tip{
+	color: #fff;
+	width: 1.6rem;
+	padding: 0.1rem 0;
+	border-radius: 0.1rem;
+	text-align: center;
+	-webkit-border-radius: 0.1rem;
+	-moz-border-radius: 0.1rem;
+	-ms-border-radius: 0.1rem;
+	-o-border-radius: 0.1rem;
+}
+.item-content{
+	padding: 0 0.2rem;
+	text-indent:2em;
+	margin:0.2rem 0;
+	font-size:0.32rem;
+}
+.item-health{
+	background-color: #00ADC1;
+}
+.item-job,.item-all{
+	background-color: #9BC53F;
+}
+.item-love{
+	background-color: #E84C3D;
+}
+.item-money{
+	background-color: #F2A91C;
+}
+.item-work{
+	background-color: #F87C4B;
+}
+.fold-btn{
+    float: right;
+    background-color:rgba(0, 0, 0,0.6);
+    width:1.2rem;
+    text-align: center;
+    height:0.6rem;
+    line-height: 0.6rem;
+    border-radius:0.1rem;
+    color:#fff;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-border-radius:0.1rem;
+    -moz-border-radius:0.1rem;
+    -ms-border-radius:0.1rem;
+    -o-border-radius:0.1rem;
+}
+.fold-able{
+    height:0.76rem;overflow: hidden;line-height: 0.4rem;
+}
+.luck-analys-con{
+    height:0.6rem;
+    margin-top:0.2rem;
+}    
+.luck-analys {
+    padding: 0 0.1rem;
+    background-color: #E84C3D;
+    color: #fff;
+    border-radius: 0.1rem;
+    float:left;
+    height:0.6rem;
+    line-height:0.6rem;
+    -webkit-border-radius: 0.1rem;
+    -moz-border-radius: 0.1rem;
+    -ms-border-radius: 0.1rem;
+    -o-border-radius: 0.1rem;
+}
+  .change-time{
+  	margin-top:0.04rem;
+  	height:0.5rem;
+	display: inline-block
+  }
+  .analys-centent{
+  	text-indent:2em;
+  }
+ .date-time{
+	padding: 0.1rem;
+	vertical-align: middle;
+	float: left;
+	width: 20%;
+	font-size:20px;
+	margin-left:0.1rem;
+ }

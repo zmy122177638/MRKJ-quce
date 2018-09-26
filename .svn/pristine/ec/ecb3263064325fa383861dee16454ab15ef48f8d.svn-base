@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>有趣的测算</title>
+    <!--[if lt IE 9]>  
+        <script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+        <script src="https://cdn.bootcss.com/respond.__PUBLIC__/js/1.4.2/respond.min.js"></script>    
+    <![endif]-->
+    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+    <script src="__PUBLIC__/js/rem.js"></script>
+    <style>
+        body{background-color:#efeff4;}
+        main{padding-top:0.92rem;}
+        .login_container{margin-top:0.2rem;}
+        .user_nav{list-style: none;}
+        .user_nav li{margin-bottom:0.2rem;}
+        .nav_i{
+            text-decoration: none;
+            display: flex;
+            display: -webkit-flex;
+            display: -webkit-box;
+            align-items: center;
+            -webkit-box-align: center;
+            padding:0.3rem 0.25rem;
+            background-color:#ffffff;
+            color:#333333;
+            font-size:0.28rem;
+            -webkit-tap-highlight-color: rgba(255,255,255,0);
+            position: relative;
+        }
+        .nav_genduo::after{
+            content: '';
+            width:0.26rem;height:0.26rem;
+            position: absolute;
+            display: inline-block;
+            background:url('__PUBLIC__/images/arrow.png') no-repeat;
+            background-size:100% 100%;
+            right:0.4rem;
+            top:50%;
+            margin-top:-0.13rem;
+        }
+        .nav_t{
+            padding:0.3rem 0.2rem;
+            background-color:#EF4E3A;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            color:#ffffff;
+            font-size:0.28rem;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .n_right p:nth-child(2){font-size:0.28rem;color:#8f8f94;}
+        .n_right p:nth-child(2) span{color: #4a87ee;}
+        .nav_navt{
+            width:0.8rem;
+            height:0.8rem;
+            margin-right:0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <include file="Public/index-head"/>
+    <main>
+        <div class="login_container">
+            <div class="user_content">
+                <ul class="user_nav">
+                    <if condition="$userData['nickname'] eq ''">
+                        <li>
+                            <a href="<!--{:U('Login/login','',false)}-->" class="nav_i">
+                                <img src="http://qiniu.ddznzj.com/media/180601/180601180815365.png" alt="" class="nav_navt">
+                                <div class="n_right">
+                                    <p>亲，您现在还是游客哦！</p>
+                                    <p><span>立即登录</span>，享受更多服务</p>
+                                </div>
+                            </a>
+                        </li>
+                        <else />
+                        <li>
+                            <a href="<!--{:U('Login/login','',false)}-->" class="nav_i">
+                                <img src="<!--{$userData['headimgurl']}-->" alt="" class="nav_navt">
+                                <div class="n_right">
+                                    <p><!--{$userData['nickname']}--></p>
+                                    <p><span><!--{$userData['province']}--></span><!--{$userData['city']}--></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<!--{:U('Index/mytest','',false)}-->" class="nav_i nav_genduo">
+                                <p>我测过的</p>
+                            </a>
+                        </li>
+                    </if>
+                    <if condition="$userData['nickname'] eq ''">
+                        <li><a href="<!--{:U('Login/login','',false)}-->" class="nav_t">立即登录</a></li>
+                        <else />
+                        <li><a href="<!--{:U('Login/loginOut','',false)}-->" class="nav_t">退出</a></li>
+                    </if>
+
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>趣味心理测试</title>
+    <!--[if lt IE 9]>  
+        <script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+        <script src="https://cdn.bootcss.com/respond.__PUBLIC__/js/1.4.2/respond.min.js"></script>    
+    <![endif]-->
+    <link rel="stylesheet" href="__PUBLIC__/css/_palace.css">
+    <script src="__PUBLIC__/js/rem.js"></script>
+    <script src="__PUBLIC__/js/vue.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div class="chatCS" :style="start_b?'padding-bottom:1.3rem':''" >
+                <div v-for=" item in charatData " class="chatCS_item">
+                    <!-- 接收文字模板 -->
+                    <div class="us_left" v-if="item.type == 'text'">
+                        <img class="us_left_avatar" src="http://qiniu.ddznzj.com/media/180601/180601180815365.png">
+                        <div class="us_left_content">{{ item.content }}</div>
+                    </div>
+                    <!-- 接收图片模板 -->
+                    <div class="us_left" v-if="item.type == 'img'">
+                        <img class="us_left_avatar" src="http://qiniu.ddznzj.com/media/180601/180601180815365.png">
+                        <div class="us_left_content">
+                            <div class="us_over"><img :src="'__PUBLIC__/images/quce/'+item.title_img" @click="fullScreenEvent('__PUBLIC__/images/quce/'+item.title_img)" width="100%" class="xb_sendimg"></div>
+                        </div>
+                    </div>
+                    <!-- 接收测算结果模板 -->
+                    <div class="us_left" v-if="item.type == 'Endimg'">
+                        <img class="us_left_avatar" src="http://qiniu.ddznzj.com/media/180601/180601180815365.png">
+                        <div class="us_left_content">
+                            <div class="us_over"><img :src="item.title_img" @click="fullScreenEvent(item.title_img)" style="margin-bottom: -1.15rem !important;" width="100%" class="xb_sendimg"></div>
+                        </div>
+                    </div>
+                    <!-- 发送文字模板 -->
+                    <div class="us_right" v-if="item.type == 'huifu'">
+                        <if condition="$userData['headimgurl'] eq ''">
+                            <img class="us_right_avatar" src="__PUBLIC__/images/user_avatar.png">
+                            <else />
+                            <img class="us_right_avatar" src="<!--{$userData['headimgurl']}-->">
+                        </if>
+                        
+                        <div class="us_right_content">
+                            {{item.content}}
+                        </div>
+                    </div>
+                    <!-- 接收题目和题目选项模板 -->
+                    <!-- <div class="subjectNum" v-if="item.type=='timu'" ><h4>第{{item.timu_type}}题/共{{localData.length}}题</h4></div> -->
+                    <div class="us_left" v-if="item.type=='timu'">
+                        <img class="us_left_avatar" src="http://qiniu.ddznzj.com/media/180601/180601180815365.png">
+                        <div class="us_left_content">{{ item.timu_title }}</div>
+                    </div>
+                    <!-- 题目图片 -->
+                    <div class="us_left" v-if="item.type=='timu' && item.timu_img != undefined">
+                        <img class="us_left_avatar" src="http://qiniu.ddznzj.com/media/180601/180601180815365.png">
+                        <div class="us_left_content">
+                            <div class="us_over"><img :src="'__PUBLIC__/images/quce/'+item.timu_img" @click="fullScreenEvent('__PUBLIC__/images/quce/'+item.timu_img)" width="100%" class="xb_sendimg"></div>
+                        </div>
+                    </div>
+                    <div class="subject_box" v-if="item.type=='timu'">
+                        <div class="subject_wrap">
+                            <div class="subject_row" v-for="(timu_,index) in item.timu" @click="item.bledclick || setselected(timu_.split('-')[1],$event)">
+                                <p>{{timuorder[index-1]+'.'+timu_.split('-')[0]}}</p>
+                                <img src="http://qiniu.ddznzj.com/media/180601/180601181025110.png" class="subject_icon">
+                                <img src="http://qiniu.ddznzj.com/media/180601/180601181002412.png" style="display:none;" class="subject_icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 测算提示 -->
+            <div class="promt_container" v-if="promt_B">
+                <div class="promt_wrap"><img src="__PUBLIC__/images/newhelp.png" alt=""></div>
+            </div>
+            <!-- 查看图片 -->
+            <div class="fullScreen_container" @click="NofullScreen()" v-show="fullScreenHidden">
+                <div class="fullScreen_wrap">
+                    <img :src="screenImgsrc" width="100%" alt="">
+                </div>
+            </div>
+            <!-- 悬浮按钮 -->
+            <div class="us_btn_fiexd" v-if="!start_b">
+                <div class="us_btn_box">
+                    <a href="javascript:;" class="us_btn_star" @click="startCS()">{{starttxt}}</a>
+                </div>
+            </div>
+
+            <!-- <div class="us_btn_fiexd" v-if="start_c">
+                <div class="us_btn_box">
+                    <a href="javascript:;" class="us_btn_star">分享给朋友测测</a>
+                    <a href="javascript:;" class="us_btn_star" @click="startCS()">再来一次</a>
+                </div>
+            </div> -->
+
+            <!-- 回退弹窗 -->
+            <!-- <div class="hst_tc_container" v-show="hstShow" @click.self="cancalHstHidden()">
+                <div class="hst_tc_wrap">
+                    <div class="hst_tc_tile">专业测评·命理推荐</div>
+                    <div class="hst_tc_content">
+                        <ul class="hst_tc_ul">
+                            <li v-for="hstitem in hst_tc_Data">
+                                <a href="" class="li_item">
+                                    <figure class="li_img"><img :src="hstitem.imgsrc" alt=""></figure>
+                                    <div class="li_center">
+                                        <p class="li_title">{{hstitem.ptitle}}</p>
+                                        <p class="li_describe">{{hstitem.pdescribe}}</p>
+                                    </div>
+                                    <img src="__PUBLIC__/images/arrow.png" alt="" class="li_gdicon">
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="" class="Morecp_btn">更多专业测评·命理 <img src="__PUBLIC__/images/arrow2.png" alt="" class="hst_gdicon"></a>
+                    </div>
+                    <div class="hst_tc_foot">
+                        <p class="hst_tc_foot_point">*以上测试均会生成一份详细的专业测评报告*</p>
+                        <div class="hst_tc_btn_box">
+                            <span class="hst_tc_close_btn" @click="closepageEvent()">仍要离开</span>
+                        </div>
+                    </div>
+                    <div class="hst_tc_cancal_btn" @click="cancalHstHidden()"></div>
+                </div>
+            </div> -->
+            
+        </div>
+        <script>
+            
+            var hst_tc_Data = [
+                {imgsrc:'http://uploads-admin.cdn.woquhudong.cn/quce/1506336759wWQxR.jpg',ptitle:'[八字揭秘]你的运气有多好？',pdescribe:'2018狗年运程解析，助您催旺桃花姻缘，升官发财！'},
+                {imgsrc:'http://uploads-admin.cdn.woquhudong.cn/quce/1506336759wWQxR.jpg',ptitle:'[八字揭秘]你的运气有多好？',pdescribe:'2018狗年运程解析，助您催旺桃花姻缘，升官发财！'},
+                {imgsrc:'http://uploads-admin.cdn.woquhudong.cn/quce/1506336759wWQxR.jpg',ptitle:'[八字揭秘]你的运气有多好？',pdescribe:'2018狗年运程解析，助您催旺桃花姻缘，升官发财！'},
+                {imgsrc:'http://uploads-admin.cdn.woquhudong.cn/quce/1506336759wWQxR.jpg',ptitle:'[八字揭秘]你的运气有多好？',pdescribe:'2018狗年运程解析，助您催旺桃花姻缘，升官发财！'},
+            ]
+            var vm = new Vue({
+                el:'#app',
+                data:{
+                    EndData:[],   //答案数据
+                    localData:[],  //题目数据
+                    charatData:[], //测算的所有数据
+                    timuorder:['a','b','c','d','e','f','g','h','i','j','k','l','m','n'], //题目序号
+                    hst_tc_Data:hst_tc_Data,
+                    hstShow:false,
+                    start_b:true,
+                    start_c:false,
+                    promt_B:false,
+                    starttxt:'开始',
+                    screenImgsrc:'',
+                    fullScreenHidden:false
+                },
+                mounted(){
+                    this.getsubjectEndData(); 
+                    this.getsubjectData();
+                    // this.addHistoryEvent();
+                },
+                methods:{
+                    // 监听回退事件
+                    addHistoryEvent(){
+                        var _self = this;
+                        window.history.pushState(null,null,document.URL)
+                        window.addEventListener('popstate',function(){
+                            _self.hstShow = true;
+                            history.pushState(null, null, document.URL);
+                        })
+                    },
+                    // 关闭弹窗
+                    cancalHstHidden(){
+                        this.hstShow = false;
+                    },
+                    // 离开这个页面
+                    closepageEvent(){
+                        window.location.href='index.html'
+                    },
+                    // 滚动
+                    scrollNextTick(){
+                        this.$nextTick(function(){
+                            $('.chatCS').animate({scrollTop: $('.chatCS')[0].scrollHeight}, 500);
+                        })
+                    },
+                    // 更新题目
+                    getChart(timu,_self){
+                        _self.localData.forEach(function(item,index){
+                            if(timu == item.timu_type){
+                                item.type = "timu"
+                                item.bledclick = false;
+                                _self.charatData.push(item)
+                            }
+                        })
+                        _self.scrollNextTick();
+                    },
+                    // 获取题目数据
+                    getsubjectData(){
+                        var _self = this;
+                        $.get("<!--{:U('Index/topic','',false)}-->",function(data){
+                            var data = JSON.parse(data);
+                            _self.localData = data;
+                            console.log(_self.localData)
+                        })
+                    },
+                    // 获取标题和答案
+                    getsubjectEndData(){
+                        var _self = this;
+                        $.get("<!--{:U('Index/answer','',false)}-->",function(data){
+                            var data = JSON.parse(data);
+                                _self.EndData = data;
+                                setTimeout(function(){
+                                    _self.charatData.push({
+                                    'type': 'text',
+                                    'content': data.content,
+                                    'id':data.id,
+                                    'title':data.title,
+                                    'title_img':data.title_img
+                                })
+                                setTimeout(function(){
+                                    _self.charatData.push({
+                                        'type': 'img',
+                                        'content': data.content,
+                                        'id':data.id,
+                                        'title':data.title,
+                                        'title_img':data.title_img
+                                    })
+                                    _self.start_b = false;
+                                },800)
+                            },500)
+                        })
+                    },
+                    // 开始测算
+                    startCS(){
+                        this.start_b = true;
+                        // this.start_c = false;
+                        var _self = this;
+                        _self.charatData.push({
+                            'type': 'huifu',
+                            'content': '开始',
+                        })
+                        if(sessionStorage.getItem('palace-promt') != 'YES'){
+                            _self.promt_B = true;
+                            setTimeout(function(){_self.promt_B = false;sessionStorage.setItem('palace-promt','YES')},2000)
+                        }
+                        setTimeout(function(){_self.getChart(_self.localData[0].timu_type,_self)},500) 
+                    },
+                    // 选择题目列表
+                    setselected(timu,event){
+                        var _self = this;
+                        var node = event.currentTarget;
+                        var huifu = node.children[0].innerHTML;
+                        node.style.backgroundColor = "#FFCC00";
+                        node.children[2].style.display = "block";
+                        node.children[1].style.display = "none";
+                        _self.charatData.push({
+                            'type': 'huifu',
+                            'content': huifu,
+                        })
+                        _self.charatData.forEach(function(item){item.bledclick = true});
+                        if(/^[A-Z]/.test(timu)){
+                            var Answer = timu ; // 答案
+                            _self.charatData.push({
+                                'type': 'text',
+                                'content': '正在为你分析结果...',
+                            })
+                            _self.scrollNextTick();
+                           $.post("<!--{:U('Index/AnswerPalace','',false)}-->",{Answer:Answer},function(data){
+                               var data =JSON.parse(data)
+                               if(data.img == ""){
+                                        setTimeout(function(){
+                                            _self.charatData.push({
+                                                'type': 'text',
+                                                'content':data.answer
+                                            })
+                                            _self.scrollNextTick();
+                                        setTimeout(function(){
+                                            _self.charatData.push({
+                                                'type': 'text',
+                                                'content': data.text
+                                            })
+                                            _self.starttxt = "再来一次";
+                                            _self.start_b = false;
+                                            // _self.start_c = true;
+                                            _self.scrollNextTick();
+                                        },1000)
+                                    },2000)
+                               }else{
+                                setTimeout(function(){
+                                        _self.charatData.push({
+                                            'type': 'Endimg',
+                                            'title_img':data.img
+                                        })
+                                        _self.scrollNextTick();
+                                    setTimeout(function(){
+                                        _self.charatData.push({
+                                            'type': 'text',
+                                            'content': '长按上方保存你的结果卡片，分享给朋友测测',
+                                        })
+                                        _self.starttxt = "再来一次";
+                                        _self.start_b = false;
+                                        // _self.start_c = true;
+                                        _self.scrollNextTick();
+                                    },1000)
+                                },2000)
+                               }
+                           })
+                        }else{
+                            var timu = Number(timu);
+                            setTimeout(function(){_self.getChart(timu,_self)},300);
+                        }
+                    },
+                    // 大图查看图片
+                    fullScreenEvent(src){
+                        this.screenImgsrc = src;
+                        this.fullScreenHidden = true;
+                        document.body.style.overflow = "hidden";
+                    },
+                    NofullScreen(){
+                        this.fullScreenHidden = false;
+                        document.body.style.overflow = "";
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

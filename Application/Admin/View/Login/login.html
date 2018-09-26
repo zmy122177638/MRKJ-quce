@@ -1,0 +1,101 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录</title>
+
+<link href="__PUBLIC__/css/login.css" type="text/css" rel="stylesheet" />
+
+</head>
+<body id="userlogin_body">
+
+<form action="__MODULE__/Login/test" method="post" onsubmit="return check()">
+	<div id="user_login">
+		<dl>
+			<dd id="user_top">
+				<ul>
+					<li class="user_top_l"></li>
+					<li class="user_top_c"></li>
+					<li class="user_top_r"></li>
+				</ul>
+			</dd>
+			<dd id="user_main">
+				<ul>
+					<li class="user_main_l"></li>
+					<li class="user_main_c">
+					<span id='span' style='color:#f00;'></span>
+
+
+						<div class="user_main_box">
+							<ul>
+								
+								<li class="user_main_text">用户名： </li>
+								<li class="user_main_input"><input type="text" name="adname" maxlength="20" id="user" class="txtusernamecssclass"> </li>
+							</ul>
+							<ul>
+								<li class="user_main_text">密 码： </li>
+								<li class="user_main_input"><input type="password" name="password" id="pw" class="txtpasswordcssclass"> </li>
+							</ul>
+
+                            <ul>
+                                <li class="user_main_text">验证码： </li>
+                                <li  class="user_main_input"><input height="60" size="5"  type="text" name="yzm"  >
+
+                                </li>
+                                <li>
+                                    <a  href="javascript:void(0)" title="看不清" onclick="kbq();"><img id="verification" src="<!--{:U('admin/login/code','',false)}-->" alt=""/></a>
+                                </li>
+                                <li ><span id="tips"></span></li>
+                            </ul>
+
+							<ul>
+
+								<li class="user_main_input">
+									<input type="checkbox" name="check"  value="1" />
+								</li>
+								<li class="user_main_text">记住密码</li>
+							</ul>
+                            <ul>
+                                <li class="user_main_text"> </li>
+                                <li class="user_main_input"><input type="submit" name="submit" value="登录"> </li>
+                            </ul>
+						</div>
+
+
+					</li>
+					<li class="user_main_r"><input type="image" name="IbtnEnter" src="__PUBLIC__/img/user_botton.gif" class="ibtnentercssclass"></li>
+				</ul>
+			</dd>
+			<dd id="user_bottom">
+				<ul>
+					<li class="user_bottom_l"></li>
+					<li class="user_bottom_c"></li>
+					<li class="user_bottom_r"></li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+</form>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    function kbq(){
+        document.getElementById("verification").src="<!--{:U('admin/login/code','',false)}-->";
+    }
+
+    $("input[name=yzm]").keyup(function(){
+       if($(this).val().length>=4){
+//           alert('xx');
+           $.getJSON('__MODULE__/login/checkVerifyCode',{verifycode:$(this).val()},function(msg){
+               if(msg.code==0){
+                   $('#tips').html('错误').css('color','#f00');
+               }else if(msg.code==1){
+                   $('#tips').html('正确').css('color','#0a0');
+               }
+           });
+       }
+
+    });
+
+</script>
+</body>
+</html>
