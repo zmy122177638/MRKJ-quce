@@ -34,9 +34,9 @@
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 
-                        <foreach name="bannerArr" item="value">
-                            <div class="swiper-slide"><a href="<!--{:U('Index/palace','',false)}-->?subject=<!--{$value['subject']}-->&id=<!--{$value['id']}-->" class="swiper_btn" target="_blank"><img src="__PUBLIC__/images/<!--{$value['image']}-->" width="100%" alt=""></a></div>
-                        </foreach>
+						<foreach name="bannerArr" item="value">
+								<div class="swiper-slide"><a href="<!--{:U('Index/palace','',false)}-->?subject=<!--{$value['subject']}-->&id=<!--{$value['id']}-->" class="swiper_btn" target="_blank"><img src="__PUBLIC__/images/<!--{$value['image']}-->" width="100%" alt=""></a></div>
+						</foreach>
 
 					</div>
 					<div class="swiper-pagination"></div>
@@ -48,12 +48,12 @@
 					<!--<h3 class="public_title"><span class="p_text">专业命理测算</span><a href="javascript:;">更多 ></a></h3>-->
 					<ul class="Palace_wrap">
 
-                        <foreach name="zhimingArr" item="value">
-                        <li><a href="<!--{:U('Index/palace','',false)}-->?subject=<!--{$value['subject']}-->&id=<!--{$value['id']}-->" class="Palace_item" target="_blank">
-                        <figure><img src="__PUBLIC__/images/<!--{$value['image']}-->" class="Palace_img"></figure>
-                        <h3 class="Palace_name"><!--{$value['name']}--></h3>
-                        </a></li>
-                        </foreach>
+						<foreach name="zhimingArr" item="value">
+						<li><a href="<!--{:U('Index/palace','',false)}-->?subject=<!--{$value['subject']}-->&id=<!--{$value['id']}-->" class="Palace_item" target="_blank">
+						<figure><img src="__PUBLIC__/images/<!--{$value['image']}-->" class="Palace_img"></figure>
+						<h3 class="Palace_name"><!--{$value['name']}--></h3>
+						</a></li>
+						</foreach>
 
 					</ul>
 
@@ -213,12 +213,10 @@
 					$.get("<!--{:U('Index/indexAnswer','',false)}-->",{page:_self.Hotpage},function(data){
 						var data = JSON.parse(data);
 						_self.HottestData = data;
-						console.log(_self.HottestData)
 					});
 					$.get("<!--{:U('Index/indexAnswerNew','',false)}-->",{page:_self.NewPage},function(data){
 						var data = JSON.parse(data);
 						_self.NewesttData = data;
-						console.log(_self.NewesttData)
 					})
 				}, 
 				// loadplugin
@@ -247,7 +245,7 @@
 					headroom1.init();// headroom.destroy(); 销毁实例
 
 					//swiper轮播
-					var swiper = new Swiper('.swiper-container', {
+					new Swiper('.swiper-container', {
 						loop:true,
 						effect : 'fade',
 						autoplay:{
@@ -262,7 +260,7 @@
 					});
 					
 					// swiper分类
-					var swiper = new Swiper('.swiper-container1', {slidesPerView:'auto',});
+					new Swiper('.swiper-container1', {slidesPerView:'auto',});
 				},
 				// 内容更新
 				readyOpenEvent(){
@@ -297,7 +295,6 @@
 									_self.Hotpage++;
 									$.get("<!--{:U('Index/indexAnswer','',false)}-->",{page:_self.Hotpage},function(data){
 										var data = JSON.parse(data);
-										console.log(data[0].page)
 										if(data[0].content != undefined){
 											data.forEach(function (item){
 												_self.HottestData.push(item)
@@ -318,7 +315,6 @@
 									_self.NewPage++;
 									$.get("<!--{:U('Index/indexAnswerNew','',false)}-->",{page:_self.NewPage},function(data){
 										var data = JSON.parse(data);
-										console.log(data[0].page)
 										if(data[0].content != undefined){
 											data.forEach(function (item){
 												_self.NewesttData.push(item)

@@ -48,14 +48,14 @@ function onStartHandle(){
       
     $('.namenum_container').hide();
     $('.nav_body').hide();
+    $(window).scrollTop(0);
     $('.result').show();
     $('.result_container').show();
-    //发送ajax请求
-    ajaxDataEvent(function(){
-        playhtml2Canvas();
-    });
     //显示等待界面
     $(".loadingBox").show();
+    //发送ajax请求
+    ajaxDataEvent(playhtml2Canvas);
+    
 }
 
 // 调用Html2Canvas

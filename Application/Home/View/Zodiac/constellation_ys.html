@@ -175,11 +175,13 @@
         var xzType = "today";  //默认今日运势
         var userxz = null; //用户绑定星座
         let aviurl= "<!--{$headimgurl}-->";
-        if(aviurl){
-            $('.user_portrait').attr('src',aviurl);
-        }else{
-            console.log('不是微信')
-        }
+        $(function(){
+            if(aviurl){
+                $('.user_portrait').attr('src',aviurl);
+            }else{
+                console.log('不是微信')
+            }
+        })
         var xzdata = [
             {xz_icon:'__PUBLIC__/images/constellation_ys/signSmall0.png',xz_time:'水瓶座(01.20-02.18)',xz_name:'水瓶'},
             {xz_icon:'__PUBLIC__/images/constellation_ys/signSmall1.png',xz_time:'双鱼座(02.19-03.20)',xz_name:'双鱼'},

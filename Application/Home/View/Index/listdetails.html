@@ -118,12 +118,10 @@
 					$.get("<!--{:U('Index/indexAnswer','',false)}-->",{page:_self.Hotpage},function(data){
 						var data = JSON.parse(data);
 						_self.HottestData = data;
-						console.log(_self.HottestData)
 					});
 					$.get("<!--{:U('Index/indexAnswerNew','',false)}-->",{page:_self.NewPage},function(data){
 						var data = JSON.parse(data);
 						_self.NewesttData = data;
-						console.log(_self.NewesttData)
 					});
 				}, 
 				// loadplugin
@@ -169,7 +167,6 @@
 								_self.Hotpage++;
 								$.get("<!--{:U('Index/indexAnswer','',false)}-->",{page:_self.Hotpage},function(data){
 									var data = JSON.parse(data);
-									console.log(data[0].page)
 									if(data[0].content != undefined){
 										data.forEach(function (item){
 											_self.HottestData.push(item)
@@ -190,7 +187,6 @@
 								_self.NewPage++;
 								$.get("<!--{:U('Index/indexAnswerNew','',false)}-->",{page:_self.NewPage},function(data){
 									var data = JSON.parse(data);
-									console.log(data[0].page)
 									if(data[0].content != undefined){
 										data.forEach(function (item){
 											_self.NewesttData.push(item)

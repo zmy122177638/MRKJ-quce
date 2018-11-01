@@ -86,38 +86,39 @@ window.onload = function() {
 
 }
 
-function onStartHandle() {
-    womanName = document.querySelector(".woman-name").value.trim();
-    manName = document.querySelector(".man-name").value.trim();
-    if (womanName === '') {
-        alert('请输入女生姓名');
-        return;
-    }
-    if (manName === '') {
-        alert('请输入男生姓名');
-        return;
-    }
-    // ajax数据
-    ajaxDataEvent();
-    // 隐藏主页
-    $('.content').hide()
-    $('.nav_body').hide();
-    //显示等待界面
-    $('.loadingBox').show()
-    // 显示结果
-    $('.result').show();
-    $('.result_container').show();
-    // 开始截图
-    playhtml2Canvas();
-}
+// function onStartHandle() {
+//     womanName = document.querySelector(".woman-name").value.trim();
+//     manName = document.querySelector(".man-name").value.trim();
+//     if (womanName === '') {
+//         alert('请输入女生姓名');
+//         return;
+//     }
+//     if (manName === '') {
+//         alert('请输入男生姓名');
+//         return;
+//     }
+//     // ajax数据
+//     ajaxDataEvent();
+//     // 隐藏主页
+//     $('.content').hide()
+//     $('.nav_body').hide();
+//     //显示等待界面
+//     $('.loadingBox').show();
+//     $(window).scrollTop(0);
+//     // 显示结果
+//     $('.result').show();
+//     $('.result_container').show();
+//     // 开始截图
+//     playhtml2Canvas();
+// }
 
 // 传递数据
-function ajaxDataEvent(){
-    $('.woman').html(womanName);
-    $('.man').html(manName);
-    $('.womanxz').attr('src',bstart[gid - 1]);
-    $('.manxz').attr('src',gstart[bid - 1]);
-}
+// function ajaxDataEvent(){
+//     $('.woman').html(womanName);
+//     $('.man').html(manName);
+//     $('.womanxz').attr('src',bstart[gid - 1]);
+//     $('.manxz').attr('src',gstart[bid - 1]);
+// }
 
 // 调用Html2Canvas
 function playhtml2Canvas(){

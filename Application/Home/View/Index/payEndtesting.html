@@ -142,7 +142,6 @@
                                 _self.totalFenNumArray = [];
                                 _self.timuIndex = 1;
                                 _self.timestart(_self);
-                                console.log(132)
                                 _self.timuObject.forEach(function(item,index){
                                     for(let index in item.timu){item.timu[index].checked = false}
                                 })
@@ -212,7 +211,6 @@
                 selectTimuSubmit(){
                     var _self = this;
                     var totalFenNum  = _self.totalFenNumArray.reduce(function(total,active){return total += Number(active);},0)
-                    console.log('总分'+totalFenNum);
                     layer.open({
                         type: 2
                         ,content: '正在提交',

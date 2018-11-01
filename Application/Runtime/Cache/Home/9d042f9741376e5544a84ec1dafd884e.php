@@ -71,8 +71,6 @@
         <a href="<?php echo U('Index/mytest','',false);?>" class="navigate <?php echo ($head=='mytest' ? 'active':''); ?>">我的历史</a>
         <?php if($channel == 'qudao150'): else: ?>
             <a href="<?php echo U('Login/index','',false);?>" class="navigate <?php echo ($head=='login' ? 'active':''); ?>">我的</a><?php endif; ?>
-
-        <!--active-->
     </nav>
 </header>
     <main>

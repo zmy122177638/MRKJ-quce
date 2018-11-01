@@ -7,6 +7,7 @@ function onStartHandle(jmData){
     $(".loadingBox").show();
     $('.jm_container').hide();
     $('.nav_body').hide();
+    $(window).scrollTop(0);
     ajaxDataEvent(jmData);
     $('.result').show();
     $('.result_container').show();

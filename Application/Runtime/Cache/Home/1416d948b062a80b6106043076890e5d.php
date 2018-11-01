@@ -16,6 +16,14 @@
     <script src="/quce/Public/js/rem.js"></script>
     <script src="/quce/Public/js/vue.min.js"></script>
     <script src="/quce/Public/js/jquery.min.js"></script>
+
+
+    <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_"+<?php echo ($CNZZid); ?>+"'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D"+<?php echo ($CNZZid); ?>+"' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+
+
     </head>
     <body>
         <div id="app">

@@ -39,7 +39,7 @@
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 
-                        <div class="swiper-slide"><a href="/quce/index.php/Home-Index-palace?subject=QWCS6&id=9" class="swiper_btn" target="_blank"><img src="/quce/Public/images/banner.jpg" width="100%" alt=""></a></div><div class="swiper-slide"><a href="/quce/index.php/Home-Index-palace?subject=QWCS7&id=10" class="swiper_btn" target="_blank"><img src="/quce/Public/images/banner01.jpg" width="100%" alt=""></a></div><div class="swiper-slide"><a href="/quce/index.php/Home-Index-palace?subject=QWCS8&id=11" class="swiper_btn" target="_blank"><img src="/quce/Public/images/banner02.jpg" width="100%" alt=""></a></div>
+						<div class="swiper-slide"><a href="/quce/index.php/Home-Index-palace?subject=QWCS6&id=9" class="swiper_btn" target="_blank"><img src="/quce/Public/images/banner.jpg" width="100%" alt=""></a></div><div class="swiper-slide"><a href="/quce/index.php/Home-Index-palace?subject=QWCS7&id=10" class="swiper_btn" target="_blank"><img src="/quce/Public/images/banner01.jpg" width="100%" alt=""></a></div><div class="swiper-slide"><a href="/quce/index.php/Home-Index-palace?subject=QWCS8&id=11" class="swiper_btn" target="_blank"><img src="/quce/Public/images/banner02.jpg" width="100%" alt=""></a></div>
 					</div>
 					<div class="swiper-pagination"></div>
 				</div>
@@ -50,31 +50,31 @@
 					<!--<h3 class="public_title"><span class="p_text">专业命理测算</span><a href="javascript:;">更多 ></a></h3>-->
 					<ul class="Palace_wrap">
 
-                        <li><a href="/quce/index.php/Home-Index-palace?subject=QWCS9&id=14" class="Palace_item" target="_blank">
-                        <figure><img src="/quce/Public/images/quce/QWCS9title.png" class="Palace_img"></figure>
-                        <h3 class="Palace_name">你的性格</h3>
-                        </a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS10&id=15" class="Palace_item" target="_blank">
-                        <figure><img src="/quce/Public/images/quce/QWCS10title.png" class="Palace_img"></figure>
-                        <h3 class="Palace_name">暗恋</h3>
-                        </a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS11&id=16" class="Palace_item" target="_blank">
-                        <figure><img src="/quce/Public/images/quce/QWCS11title.png" class="Palace_img"></figure>
-                        <h3 class="Palace_name">你的优点</h3>
-                        </a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS12&id=17" class="Palace_item" target="_blank">
-                        <figure><img src="/quce/Public/images/quce/QWCS12title.png" class="Palace_img"></figure>
-                        <h3 class="Palace_name">是缘是劫</h3>
-                        </a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS13&id=18" class="Palace_item" target="_blank">
-                        <figure><img src="/quce/Public/images/quce/QWCS13title.png" class="Palace_img"></figure>
-                        <h3 class="Palace_name">关键词</h3>
-                        </a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS18F&id=19" class="Palace_item" target="_blank">
-                        <figure><img src="/quce/Public/images/quce/QWCS18Ftitle.png" class="Palace_img"></figure>
-                        <h3 class="Palace_name">适合的恋人</h3>
-                        </a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS18&id=20" class="Palace_item" target="_blank">
-                        <figure><img src="/quce/Public/images/quce/QWCS18title.png" class="Palace_img"></figure>
-                        <h3 class="Palace_name">潜欲望</h3>
-                        </a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS19&id=21" class="Palace_item" target="_blank">
-                        <figure><img src="/quce/Public/images/quce/QWCS19title.png" class="Palace_img"></figure>
-                        <h3 class="Palace_name">手势看性格</h3>
-                        </a></li>
+						<li><a href="/quce/index.php/Home-Index-palace?subject=QWCS9&id=14" class="Palace_item" target="_blank">
+						<figure><img src="/quce/Public/images/quce/QWCS9title.png" class="Palace_img"></figure>
+						<h3 class="Palace_name">你的性格</h3>
+						</a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS10&id=15" class="Palace_item" target="_blank">
+						<figure><img src="/quce/Public/images/quce/QWCS10title.png" class="Palace_img"></figure>
+						<h3 class="Palace_name">暗恋</h3>
+						</a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS11&id=16" class="Palace_item" target="_blank">
+						<figure><img src="/quce/Public/images/quce/QWCS11title.png" class="Palace_img"></figure>
+						<h3 class="Palace_name">你的优点</h3>
+						</a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS12&id=17" class="Palace_item" target="_blank">
+						<figure><img src="/quce/Public/images/quce/QWCS12title.png" class="Palace_img"></figure>
+						<h3 class="Palace_name">是缘是劫</h3>
+						</a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS13&id=18" class="Palace_item" target="_blank">
+						<figure><img src="/quce/Public/images/quce/QWCS13title.png" class="Palace_img"></figure>
+						<h3 class="Palace_name">关键词</h3>
+						</a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS18F&id=19" class="Palace_item" target="_blank">
+						<figure><img src="/quce/Public/images/quce/QWCS18Ftitle.png" class="Palace_img"></figure>
+						<h3 class="Palace_name">适合的恋人</h3>
+						</a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS18&id=20" class="Palace_item" target="_blank">
+						<figure><img src="/quce/Public/images/quce/QWCS18title.png" class="Palace_img"></figure>
+						<h3 class="Palace_name">潜欲望</h3>
+						</a></li><li><a href="/quce/index.php/Home-Index-palace?subject=QWCS19&id=21" class="Palace_item" target="_blank">
+						<figure><img src="/quce/Public/images/quce/QWCS19title.png" class="Palace_img"></figure>
+						<h3 class="Palace_name">手势看性格</h3>
+						</a></li>
 					</ul>
 
 				</div>
@@ -241,12 +241,10 @@
 					$.get("/quce/index.php/Home-Index-indexAnswer",{page:_self.Hotpage},function(data){
 						var data = JSON.parse(data);
 						_self.HottestData = data;
-						console.log(_self.HottestData)
 					});
 					$.get("/quce/index.php/Home-Index-indexAnswerNew",{page:_self.NewPage},function(data){
 						var data = JSON.parse(data);
 						_self.NewesttData = data;
-						console.log(_self.NewesttData)
 					})
 				}, 
 				// loadplugin
@@ -275,7 +273,7 @@
 					headroom1.init();// headroom.destroy(); 销毁实例
 
 					//swiper轮播
-					var swiper = new Swiper('.swiper-container', {
+					new Swiper('.swiper-container', {
 						loop:true,
 						effect : 'fade',
 						autoplay:{
@@ -290,7 +288,7 @@
 					});
 					
 					// swiper分类
-					var swiper = new Swiper('.swiper-container1', {slidesPerView:'auto',});
+					new Swiper('.swiper-container1', {slidesPerView:'auto',});
 				},
 				// 内容更新
 				readyOpenEvent(){
@@ -325,7 +323,6 @@
 									_self.Hotpage++;
 									$.get("/quce/index.php/Home-Index-indexAnswer",{page:_self.Hotpage},function(data){
 										var data = JSON.parse(data);
-										console.log(data[0].page)
 										if(data[0].content != undefined){
 											data.forEach(function (item){
 												_self.HottestData.push(item)
@@ -346,7 +343,6 @@
 									_self.NewPage++;
 									$.get("/quce/index.php/Home-Index-indexAnswerNew",{page:_self.NewPage},function(data){
 										var data = JSON.parse(data);
-										console.log(data[0].page)
 										if(data[0].content != undefined){
 											data.forEach(function (item){
 												_self.NewesttData.push(item)

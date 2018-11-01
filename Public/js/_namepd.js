@@ -31,6 +31,7 @@ function onStartHandle(){
     $('.nav_body').hide();
     //显示等待界面
     $(".loadingBox").show();
+    $(window).scrollTop(0);
     //发送ajax请求
     ajaxDataEvent();
     
@@ -42,7 +43,9 @@ function callback(){
     $('.result_container').show();
     $("body").css('backgroundColor','#FFE3E9');
     // 画图
-    playhtml2Canvas()
+    setTimeout(function(){
+        playhtml2Canvas()
+    },1000)
 }
 // 调用Html2Canvas
 function playhtml2Canvas(){

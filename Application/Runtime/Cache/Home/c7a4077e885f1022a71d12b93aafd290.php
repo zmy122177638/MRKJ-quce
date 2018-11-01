@@ -339,6 +339,7 @@
             //显示等待界面
             $('.loadingBox').show()
             // 显示结果
+            $(window).scrollTop(0);
             $('.result').show();
             $('.result_container').show();
             // 开始截图

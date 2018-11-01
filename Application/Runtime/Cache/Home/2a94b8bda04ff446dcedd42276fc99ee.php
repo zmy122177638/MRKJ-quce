@@ -41,7 +41,7 @@
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 
-                        <?php if(is_array($bannerArr)): foreach($bannerArr as $key=>$value): ?><div class="swiper-slide"><a href="<?php echo U('Index/palace','',false);?>?subject=<?php echo ($value['subject']); ?>&id=<?php echo ($value['id']); ?>" class="swiper_btn" target="_blank"><img src="/quce/Public/images/<?php echo ($value['image']); ?>" width="100%" alt=""></a></div><?php endforeach; endif; ?>
+						<?php if(is_array($bannerArr)): foreach($bannerArr as $key=>$value): ?><div class="swiper-slide"><a href="<?php echo U('Index/palace','',false);?>?subject=<?php echo ($value['subject']); ?>&id=<?php echo ($value['id']); ?>" class="swiper_btn" target="_blank"><img src="/quce/Public/images/<?php echo ($value['image']); ?>" width="100%" alt=""></a></div><?php endforeach; endif; ?>
 
 					</div>
 					<div class="swiper-pagination"></div>
@@ -53,10 +53,10 @@
 					<!--<h3 class="public_title"><span class="p_text">专业命理测算</span><a href="javascript:;">更多 ></a></h3>-->
 					<ul class="Palace_wrap">
 
-                        <?php if(is_array($zhimingArr)): foreach($zhimingArr as $key=>$value): ?><li><a href="<?php echo U('Index/palace','',false);?>?subject=<?php echo ($value['subject']); ?>&id=<?php echo ($value['id']); ?>" class="Palace_item" target="_blank">
-                        <figure><img src="/quce/Public/images/<?php echo ($value['image']); ?>" class="Palace_img"></figure>
-                        <h3 class="Palace_name"><?php echo ($value['name']); ?></h3>
-                        </a></li><?php endforeach; endif; ?>
+						<?php if(is_array($zhimingArr)): foreach($zhimingArr as $key=>$value): ?><li><a href="<?php echo U('Index/palace','',false);?>?subject=<?php echo ($value['subject']); ?>&id=<?php echo ($value['id']); ?>" class="Palace_item" target="_blank">
+						<figure><img src="/quce/Public/images/<?php echo ($value['image']); ?>" class="Palace_img"></figure>
+						<h3 class="Palace_name"><?php echo ($value['name']); ?></h3>
+						</a></li><?php endforeach; endif; ?>
 
 					</ul>
 
@@ -216,12 +216,10 @@
 					$.get("<?php echo U('Index/indexAnswer','',false);?>",{page:_self.Hotpage},function(data){
 						var data = JSON.parse(data);
 						_self.HottestData = data;
-						console.log(_self.HottestData)
 					});
 					$.get("<?php echo U('Index/indexAnswerNew','',false);?>",{page:_self.NewPage},function(data){
 						var data = JSON.parse(data);
 						_self.NewesttData = data;
-						console.log(_self.NewesttData)
 					})
 				}, 
 				// loadplugin
@@ -250,7 +248,7 @@
 					headroom1.init();// headroom.destroy(); 销毁实例
 
 					//swiper轮播
-					var swiper = new Swiper('.swiper-container', {
+					new Swiper('.swiper-container', {
 						loop:true,
 						effect : 'fade',
 						autoplay:{
@@ -265,7 +263,7 @@
 					});
 					
 					// swiper分类
-					var swiper = new Swiper('.swiper-container1', {slidesPerView:'auto',});
+					new Swiper('.swiper-container1', {slidesPerView:'auto',});
 				},
 				// 内容更新
 				readyOpenEvent(){
@@ -300,7 +298,6 @@
 									_self.Hotpage++;
 									$.get("<?php echo U('Index/indexAnswer','',false);?>",{page:_self.Hotpage},function(data){
 										var data = JSON.parse(data);
-										console.log(data[0].page)
 										if(data[0].content != undefined){
 											data.forEach(function (item){
 												_self.HottestData.push(item)
@@ -321,7 +318,6 @@
 									_self.NewPage++;
 									$.get("<?php echo U('Index/indexAnswerNew','',false);?>",{page:_self.NewPage},function(data){
 										var data = JSON.parse(data);
-										console.log(data[0].page)
 										if(data[0].content != undefined){
 											data.forEach(function (item){
 												_self.NewesttData.push(item)

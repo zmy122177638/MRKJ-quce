@@ -179,7 +179,6 @@
     <script>
         // 传递数据
         function ajaxDataEvent(){
-            console.log(12313)
             $('.woman').html(womanName);
             $('.man').html(manName);
             $.post("<!--{:U('Zodiac/namepdObtain','',false)}-->",{bihua:nameNumCount.getNum(manName)+nameNumCount.getNum(womanName)},function(data){

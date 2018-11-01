@@ -4,10 +4,13 @@
 function startConstellationFX(nodeId){
     $('.index_container').hide();
     $('.result_img_container').hide();
+    $(window).scrollTop(0);
     stopPlayHandCartoon();
     $('.result').show();
     $(nodeId).show();
-    playhtml2Canvas(nodeId);
+    setTimeout(function(){
+        playhtml2Canvas(nodeId);
+    },2000)
 }
 
  // 选择星座
@@ -56,6 +59,7 @@ $('.getmore').on('click',function(e){
 $('.result_menu').find('li').on('click',function(e){
     var id = $(this).attr('id');
     xzType = id;
+    stopPlayHandCartoon();
     $('.menu_select').show();
     $(this).hide();
     switch(id){
@@ -93,7 +97,6 @@ $('.result_img_container').on('click',function(){
 function playhtml2Canvas(nodeId){
     var width = document.querySelector(nodeId).clientWidth;
     var height = document.querySelector(nodeId).clientHeight;
-    console.log(width,height)
     var scaleBy = 2; 
     var canvas = document.createElement("canvas");
     canvas.width = width * scaleBy;

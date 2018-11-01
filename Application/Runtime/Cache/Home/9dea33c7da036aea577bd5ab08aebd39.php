@@ -240,7 +240,7 @@
         <div class="back_popup_bg"></div>
         <div class="back_popup_wrap">
             <div class="back_popup_close"></div>
-            <h4 class="back_popup_title">快速获取专业财商测评报告</h4>
+            <h4 class="back_popup_title">快速获取专业情商测评报告</h4>
             <div class="back_popup_top">
                 <img src="/quce/Public/images/qstest/img_BJ_back.png" class="back_popup_banner" alt="">
                 <img src="/quce/Public/images/cstest/zhun.png" class="back_popup_zhun" alt="">
@@ -253,10 +253,18 @@
     <script>
         let URL = window.location.href;
         let totalArr = URL.split('?')[1].split('=')[1];
+        let isWx = "<?php echo (cookie('wxlogin')); ?>";
         $('.J_pay_event').on('click',function(){
-            $('#ConfirmPaybox').addClass('showConfirm');
             $.post("<?php echo U('Paycs/jieguoyeJson','',false);?>",{totalArr},function(data){
-                console.log(data)
+                if(data){
+                    if(isWx == 1){
+                        wxzf();
+                    }else{
+                        $('#ConfirmPaybox').addClass('showConfirm');
+                    }
+                }else{
+                    console.log('未缓存答题卡')
+                }
             })    
         })
         $('.ConfirmPaybg').on('click',function(e){
@@ -270,7 +278,7 @@
         $('.back_popup_close').on('click',function(){
             $('.back_popup_container').removeClass('show');
         })
-        $('.wxzf').on('click',function(){
+        function wxzf(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
                     "appId":"<?php echo ($appId); ?>",     //公众号名称，由商户传入
@@ -286,7 +294,15 @@
                     }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
                 }
             );
-        })
+        }
+        $('.seeBtn').on('click',function(){
+            //点击回调入库
+            $.getJSON("<?php echo U('Paycs/zhifu_tj','',false);?>",function(data){});
+        });
+        $('.back_popup_Btn').on('click',function(){
+            //点击回调入库
+            $.getJSON("<?php echo U('Paycs/zhifu_return','',false);?>",function(data){});
+        });
 
         new AnlesPlugin.countDownUp({
             setHDTime:86400,

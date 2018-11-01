@@ -168,7 +168,9 @@
             $.post("<!--{:U('Zodiac/newnamenumObtain','',false)}-->",{bihua:Math.abs(f_num-l_num)},function(data){
                 var data = JSON.parse(data);
                 $('.result_c_c').text(data);
-                success();//执行回调
+                setTimeout(function(){
+                    success();
+                },1000)
             })
         }
     </script>
