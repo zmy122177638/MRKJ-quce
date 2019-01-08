@@ -5,7 +5,6 @@
     var AnlesPlugin = {
        'countDownUp':countDownUp
     }
-
     /**
     * 
     * @param {Object} option 

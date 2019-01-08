@@ -115,7 +115,7 @@ class IndexController extends Controller {
            }
            $count=count($arr);
            for($k=0;$k<$count;$k++){
-               for($i=1;$i<5;$i++){
+               for($i=1;$i<=5;$i++){
                    $dataTimu="timu_answer{$i}";
                    $timu_fen='timu_answer'.$i.'_fen';
                    if($arr[$k][$dataTimu]){
@@ -125,7 +125,16 @@ class IndexController extends Controller {
                        $arr[$k][$timu_fen]='';
                    }
                }
+
+               if($subject=='QWCS22F'){//题目性别区分处理
+                  if(cookie('zsex')){//男
+                      if($arr[$k]['timu_type']==45){$arr[$k]='';};
+                  }else{
+                      if($arr[$k]['timu_type']==46){$arr[$k]='';};
+                  }
+               }
                $arr[$k]=array_filter($arr[$k]);
+
            }
        }else{
            if(is_numeric($subject)){
@@ -150,7 +159,8 @@ class IndexController extends Controller {
         if($paySubject!=''){
             return $arr;
         }
-        echo json_encode($arr);
+        $arr=array_filter($arr);
+        echo json_encode(array_values($arr));
     }
 
     public function classlist(){//更多分类
@@ -172,8 +182,22 @@ class IndexController extends Controller {
             }else if($value['type_img']==3){
                 $arr[$key]['typeImg']='https://www.yixueqm.com/quce/Public/images/public/major.png';
             }
-        }
 
+            //查询是否是超链接
+            $subject=$arr[$key]['subject'];
+            $dataStr=mb_substr($subject,0,7);
+            if($dataStr=='zhiming'){
+                $zhimingArr=M()->query("select link,type from qc_zhiming_link where subject='{$subject}'");
+            }
+            if($zhimingArr){
+                if($zhimingArr[0]['type']=='jiance'){
+                    $url=$zhimingArr[0]['link'].'&channel='.cookie('channel');
+                }else{
+                    $url=$zhimingArr[0]['link'].'?channel='.cookie('channel');
+                }
+                $arr[$key]['link']=$url;
+            }
+        }
         echo json_encode($arr);
     }
     public function indexAnswerNew(){//首页数据-最新
@@ -189,6 +213,21 @@ class IndexController extends Controller {
                 $arr[$key]['typeImg']='https://www.yixueqm.com/quce/Public/images/public/original.png';
             }else if($value['type_img']==3){
                 $arr[$key]['typeImg']='https://www.yixueqm.com/quce/Public/images/public/major.png';
+            }
+
+            //查询是否是超链接
+            $subject=$arr[$key]['subject'];
+            $dataStr=mb_substr($subject,0,7);
+            if($dataStr=='zhiming'){
+                $zhimingArr=M()->query("select link,type from qc_zhiming_link where subject='{$subject}'");
+            }
+            if($zhimingArr){
+                if($zhimingArr[0]['type']=='jiance'){
+                    $url=$zhimingArr[0]['link'].'&channel='.cookie('channel');
+                }else{
+                    $url=$zhimingArr[0]['link'].'?channel='.cookie('channel');
+                }
+                $arr[$key]['link']=$url;
             }
         }
         echo json_encode($arr);
@@ -272,6 +311,7 @@ class IndexController extends Controller {
             cookie('channel',$_REQUEST['channel']);//获取渠道号
         }
 
+
         if($_REQUEST['subject']){
             $subject=$_REQUEST['subject'];
             cookie('subject',$subject);
@@ -286,8 +326,16 @@ class IndexController extends Controller {
             }
         }
 
+        if(cookie('jploginHC')==''){
+            cnzz_pvuv($subject);//执行统计
+            cookie('jploginHC',1,15);
+        }
+
         //点击次数累积
         $answerArr=M()->query("select id,hotstar,click,type_img,subject from qc_choiceti_answer where id='{$id}' limit 1");
+        if(empty($answerArr)){
+            $answerArr=M()->query("select id,hotstar,click,type_img,subject from qc_choiceti_answer where subject='{$subject}' limit 1");
+        }
         $click=$answerArr[0]['click'];
         if($click>=100){
             M()->query("update qc_choiceti_answer set hotstar={$answerArr[0]['hotstar']}+0.1,click=1 where id='{$answerArr[0]['id']}'");
@@ -319,19 +367,18 @@ class IndexController extends Controller {
             $this->assign('channelID',$channelID);
 
             $subject=$answerArr[0]['subject'];
-            if($subject=='QWCS20F'||$subject=='QWCS21F'){
-                if(cookie('jploginHC')==''){
-                    cnzz_pvuv($subject);//执行统计
-                    cookie('jploginHC',1,15);
-                }
-            }
-
+            cookie('orderid',null);
             if($subject=='QWCS20F'){
                 cookie('titleName','财商测试');
                 $this->display('Payorder/csIndex');exit;
             }else if($subject=='QWCS21F'){
                 cookie('titleName','情商测试');
                 $this->display('PayorderQs/qsIndex');exit;
+            }else if($subject=='QWCS22F'){
+                $clickTJ=clickTJ($id);//点击统计
+                $this->assign('clickTJ',$clickTJ);
+                cookie('titleName','疾病与寿命测算');
+                $this->display('PayorderJK/JKIndex');exit;
             } else{
                 redirect(U('Paycs/paypage','',false)."?subject={$subject}&id={$id}");
             }
@@ -378,11 +425,14 @@ class IndexController extends Controller {
         $this->assign('head','mytest');
         $this->display("Index/mytest");
     }
-    public function selectOrder(){//查询订单是否支付
-        $ordernum=$_REQUEST['ordernum'];
-        $arr=M()->query("select id,status from qc_pay_order where ordernum='{$ordernum}' and status=1 limit 1");
-        if($arr[0]['id']){echo 1;
-        }else{echo 0;
+
+    public function selectLoop(){//查询订单是否支付
+        $orderid=$_REQUEST['ordernum'];
+        if(S($orderid)){
+            echo 1;
+            S($orderid,null);
+        }else{
+            echo 0;
         }
     }
     public  function mytest_free(){//免费订单
@@ -409,7 +459,7 @@ class IndexController extends Controller {
         }
         echo json_encode($freeDara);
     }
-    public function mytest_pay(){
+    public function mytest_pay(){//付费订单
         $uid=cookie('uid');
         $page=$_REQUEST['page'];//页数
         $number=10;//条数
@@ -466,30 +516,29 @@ class IndexController extends Controller {
         //商户订单号
         if($_REQUEST['orderid']){
             $ordernum=$_REQUEST['orderid'];
-            sleep(5);
         }else{
             $ordernum=$_REQUEST['out_trade_no'];
         }
-        sleep(5);
+
         $arr=M()->query("select * from qc_pay_order where ordernum='{$ordernum}'");
         $subject=$arr[0]['subject'];
         $answerArr=M()->query("select type_img from qc_choiceti_answer where subject='{$subject}'");
 
         if($answerArr[0]['type_img']==3){
             if(empty($arr)){sleep(5);$arr=M()->query("select * from qc_pay_order where ordernum='{$ordernum}'");}
-            if(empty($arr)){sleep(5);$arr=M()->query("select * from qc_pay_order where ordernum='{$ordernum}'");}
-            if(empty($arr)){sleep(5);$arr=M()->query("select * from qc_pay_order where ordernum='{$ordernum}'");}
 
             if($arr[0]['status']==1){
                 cookie('subject',$subject);
                 if($subject=='QWCS20F'||$subject=='QWCS21F'){//财商测算
                     redirect(U('Paycs/jieguoye','',false));
-                }else{
+                }else if($subject=='QWCS22F'){//健康测算
+                    redirect(U('Paycs/answerPage','',false).'?subject='.$subject);//答题页
+                } else{
                     header('location:'.U('Paycs/payEndtesting','',false));
                 }
             }
         }
-        header('location:'.U('Index/mytest','',false).'?orderid=$ordernum');
+        header('location:'.U('Index/mytest','',false)."?orderid={$ordernum}");
     }
     public function notify_url(){//异步支付宝回调
 //        file_put_contents('./zhiming_notify.txt',$_REQUEST);
@@ -506,11 +555,89 @@ class IndexController extends Controller {
             $ordernum = $obj->out_trade_no;
         }
         $updateTime=date("Y-m-d H:i:s");
+        S($ordernum,'1',300);//是否支付判断缓存
         M()->query("update qc_pay_order set status=1,paykind=0,updatetime='{$updateTime}' where ordernum='{$ordernum}'");
     }
 
-    public function cs(){
 
+    public function home(){//综合页
+        if($_REQUEST['channel']){
+            cookie('channel',$_REQUEST['channel']);
+        }
+        $channel=cookie('channel');
+        discountprice($channel,'YJ');//优惠价格获取
+        $this->assign('discountprice',cookie('discountprice'));
+
+        $this->display("Home/index");
+    }
+    public function yellowCalen(){//黄历
+        $this->display("Home/yellowCalen");
+    }
+    public function homeData(){//综合页数据
+        $arr=M()->query("select * from qc_home_zonghe where id>=1");
+
+//        $today=date('Y').'年'.intval(date('m')).'月'.intval(date('d')).'日';
+//        $url = "http://car.bzqmz.com/hydata/?time={$today}";
+//        $ch = curl_init();
+//        curl_setopt($ch, CURLOPT_URL, $url);//设置请求地址
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);//不需要证书验证
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);//不需要主机验证
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//        $json = curl_exec($ch);
+//        $json=json_decode($json);
+//        $data=json_decode($json->data);
+//        $arr['today']=$data->hl;
+
+        echo json_encode($arr);
+    }
+    public function calendar(){//日历
+        $year=$_REQUEST['year'];
+        $month=$_REQUEST['month'];
+        $day=$_REQUEST['day'];
+        judgeData(array($year,$month,$day),$_REQUEST);
+
+        $today=$year.'年'.intval($month).'月'.intval($day).'日';
+        $url = "http://car.bzqmz.com/hydata/?time={$today}";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);//设置请求地址
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);//不需要证书验证
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);//不需要主机验证
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec($ch);
+        $json=json_decode($json);
+        $data=json_decode($json->data);
+        echo json_encode($data->hl);
+    }
+    public function homeCnzz(){//页面点击统计
+        $typeid=$_REQUEST['typeid'];
+        $date=date('Ymd');
+        $Hcnzz=M()->query("select id,clickNum from qc_home_cnzz where date='{$date}' and typeid='{$typeid}'");
+
+        if($Hcnzz){
+            M()->query("update qc_home_cnzz set clickNum='{$Hcnzz[0]['clickNum']}'+1 where id='{$Hcnzz[0]['id']}'");
+        }else{
+            $typeidArr=M()->query("select name from  qc_home_zonghe where typeid='{$typeid}'");
+            if($typeidArr){
+                $name=$typeidArr[0]['name'];
+            }else{
+                $name='';
+            }
+            M()->query("insert into qc_home_cnzz (date,typeid,name)values('{$date}','{$typeid}','{$name}')");
+        }
+    }
+
+    public function cs(){
+        $today=date('Y').'年'.intval(date('m')).'月'.intval(date('d')).'日';
+        $url = "http://car.bzqmz.com/hydata/?time={$today}";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);//设置请求地址
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);//不需要证书验证
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);//不需要主机验证
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec($ch);
+        $json=json_decode($json);
+        $data=json_decode($json->data);
+        $arr['today']=$data->hl;
     }
 
 }

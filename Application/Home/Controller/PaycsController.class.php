@@ -2,7 +2,8 @@
 namespace Home\Controller;
 use Think\Controller;
 class PaycsController extends Controller {
-    public function paypage(){//计分付费测算
+    public function paypage(){//计分付费测算   支付页
+
         if($_REQUEST['subject']){
             $subject=$_REQUEST['subject'];
             cookie('subject',$subject);
@@ -24,6 +25,25 @@ class PaycsController extends Controller {
             cookie('orderid',$orderid);
         }
 
+        if($_REQUEST['birthday']==''){
+            $birthday='0-2018-08-08-8';
+        }else{
+            $birthday=$_REQUEST['birthday'];
+        }
+        if($_REQUEST['username']){//提交操作
+            cookie('znickname',I("request.username"));
+            cookie('zymd',mb_substr($birthday,2,10));
+            cookie('zhour',mb_substr($birthday,13,2));
+            cookie('datetype',mb_substr($birthday,0,1));
+            cookie('zsex',$_REQUEST['gender']);
+
+            $y=mb_substr(cookie('zymd'),0,4);//年
+            $m=mb_substr(cookie('zymd'),5,2); //月
+            $d=mb_substr(cookie('zymd'),8,2);//日
+            $hour=cookie('zhour');
+            $datetype=cookie('datetype');
+        }
+
         //创建订单
         $orderid=cookie('orderid');
         $znickname=cookie('znickname');if($znickname=='')$znickname='匿名';
@@ -41,8 +61,14 @@ class PaycsController extends Controller {
             $arrdata=M()->query("select id from qc_pay_order where ordernum='{$orderid}' limit 1");
             if(empty($arrdata)){
                 M()->query("delete from qc_pay_order where appuserid='{$uid}' and subject='{$subject}' and status=-1");//删除未支付数据
-                M()->query("insert into qc_pay_order (ordernum,price,username,typeid,sex,status,paykind,appuserid,ip,channel,subject)values(
+                if($_REQUEST['username']){//有提交数据
+                    M()->query("insert into qc_pay_order (ordernum,price,username,typeid,sex,status,paykind,appuserid,ip,channel,subject,datetype,year,month,day,hour)values(
+                                              '{$orderid}','{$price}','{$znickname}',0,{$zsex},-1,-1,'{$uid}','{$_SERVER['REMOTE_ADDR']}','{$channel}','{$subject}','{$datetype}',{$y},{$m},{$d},{$hour})");
+                }else{
+                    M()->query("insert into qc_pay_order (ordernum,price,username,typeid,sex,status,paykind,appuserid,ip,channel,subject)values(
                                               '{$orderid}','{$price}','{$znickname}',0,{$zsex},-1,-1,'{$uid}','{$_SERVER['REMOTE_ADDR']}','{$channel}','{$subject}')");
+                }
+
             }
         }
 
@@ -57,7 +83,12 @@ class PaycsController extends Controller {
         }else{
             cookie('wxlogin',1);
             $this->assign('wxlogin',1);
-            $xml=wxgzhzf($subject,'专业测试',cookie('orderid'));//公众号支付回调参数
+            if($answerArr[0]['title']){
+                $csName=$answerArr[0]['title'];
+            }else{
+                $csName='专业测试';
+            }
+            $xml=wxgzhzf($subject,$csName,cookie('orderid'));//公众号支付回调参数
             $xmlstring = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
             $val = json_decode(json_encode($xmlstring),true);
             $noncestr=noncestr(15);//随机字符串
@@ -90,12 +121,16 @@ class PaycsController extends Controller {
                 $this->display("PayorderQs/qspay");
             }
 
+        }else if($subject=='QWCS22F'){
+            $dataArr=ageJK($y,$zsex);//年龄健康
+            $this->assign('dataArr',$dataArr);
+            $this->display("PayorderJK/JKpay");//健康测算
         }else{
             $this->display("Index/paypage");
         }
     }
     public function answerPage(){//答题页
-        cookie('orderid',null);
+
         if($_REQUEST['subject']){
             $subject=$_REQUEST['subject'];
             cookie('subject',$subject);
@@ -104,9 +139,13 @@ class PaycsController extends Controller {
         }
         cookie('totalArr',null);
         if($subject=='QWCS20F'){//财商测算
+            cookie('orderid',null);
             $this->display("Payorder/cspayEndtesting");//答题页
         }else if($subject=='QWCS21F'){
+            cookie('orderid',null);
             $this->display("PayorderQs/qspayEndtesting");//答题页
+        }else if($subject=='QWCS22F'){
+            $this->display("PayorderJK/JKpayEndtesting");//健康答题页
         }
     }
     public function payEndtesting(){//进行测试
@@ -122,6 +161,9 @@ class PaycsController extends Controller {
         $this->assign('subject',$subject);
         if($subject=='QWCS20F'){
           $this->assign('subjectType',1);
+        }else if($subject=='QWCS22F'){
+            redirect(U('Paycs/answerPage','',false).'?subject='.$subject);//答题页
+            exit;
         }
         $this->display("Index/payEndtesting");
     }
@@ -138,35 +180,47 @@ class PaycsController extends Controller {
         if($_REQUEST['orderid']){//我的测算跳结果
             cookie('orderid',$_REQUEST['orderid']);
             $orderid=$_REQUEST['orderid'];
-            $totalnumArr=M()->query("select answer,result,subject from qc_pay_order where ordernum='{$orderid}'");
+            $totalnumArr=M()->query("select answer,result,subject,year,month,day,hour,sex from qc_pay_order where ordernum='{$orderid}'");
+            $zymd=$totalnumArr[0]['year'].'-'.str_pad($totalnumArr[0]['month'],2,"0",STR_PAD_LEFT).'-'.str_pad($totalnumArr[0]['day'],2,'0',STR_PAD_LEFT);
+            cookie('zymd',$zymd);
+            cookie('zhour',$totalnumArr[0]['hour']);
+            cookie('znickname',$totalnumArr[0]['username']);
+            cookie('zsex',$totalnumArr[0]['sex']);
+
             cookie('subject',$totalnumArr[0]['subject']);
             $subject=cookie('subject');
             if($totalnumArr[0]['answer']==0){
-                header('location:'.U('Paycs/payEndtesting','',false)."?orderid={$orderid}");
+                header('location:'.U('Paycs/payEndtesting','',false)."?subject={$subject}");
             }
             $result=$totalnumArr[0]['result'];
             if(strlen($result)>3&&$result){
                 $totalArr=$result;
                 cookie('totalArr',$result);
             }
+
             if(empty($result)){
                 $result=0;
             }
         }else{
             $orderid=cookie('orderid');
             $subject=cookie('subject');
-            if($result){
-                M()->query("update qc_pay_order set answer=1,result='{$result}' where ordernum='{$orderid}'");
+            if($subject=='QWCS22F'){
+                M()->query("update qc_pay_order set answer=1,result='{$totalArr}' where ordernum='{$orderid}'");//答案分数记录
+            }else if($result){
+                M()->query("update qc_pay_order set answer=1,result='{$result}' where ordernum='{$orderid}'");//答案分数记录
             }
         }
+
 
         if($totalArr){
             //$Payorder=new \Library\PayOrder();
             //$dateArr=$Payorder->qingshangCS($totalArr);
-            if($subject=='QWCS20F'){//答题页
+            if($subject=='QWCS20F'){//结果页
                 $this->display("Payorder/csResult");
             }else if($subject=='QWCS21F'){
                 $this->display("PayorderQs/qsResult");
+            }else if($subject=='QWCS22F'){
+                $this->display("PayorderJK/JKResult");//健康测算
             }
         }else{
             $totalnum=$result;
@@ -200,6 +254,8 @@ class PaycsController extends Controller {
                 $dateArr=$Payorder->caishangCS($totalArr);
             }else if($subject=='QWCS21F'){
                 $dateArr=$Payorder->qingshangCS($totalArr);
+            }else if($subject=='QWCS22F'){
+                $dateArr=$Payorder->jiankangCS($totalArr);//健康测算
             }
             $dateArr['orderid']=$orderid;
             $dateArr=json_encode($dateArr,JSON_UNESCAPED_SLASHES);
@@ -207,13 +263,23 @@ class PaycsController extends Controller {
         }
     }
     public function payzfb(){//支付宝
-        $this->assign('ordername1','专业测试');
-        $this->assign('ordername2','知命-专业测试');
+        $this->zhifu_tj();//支付统计
+        $csName=$_REQUEST['csName'];
+        if(empty($csName)){
+            $csName='专业测试';
+        }
+        $this->assign('ordername1',$csName);
+        $this->assign('ordername2','知命-'.$csName);
         $this->display("Index/pay");
     }
     public function paywx(){//微信
+        $this->zhifu_tj();//支付统计
+        $csName=$_REQUEST['csName'];
+        if(empty($csName)){
+            $csName='专业测试';
+        }
         $subject=cookie('subject');
-        H5ZMwxzhifu($subject,'专业测试',cookie('orderid'));//知命
+        H5ZMwxzhifu($subject,$csName,cookie('orderid'));//知命
     }
 
     public function index_cs(){//首页开始测算按钮

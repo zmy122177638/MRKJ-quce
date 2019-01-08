@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- 去除浏览器地址栏和菜单栏 -->
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='full-screen' content='true' />
+    <meta name='x5-fullscreen' content='true' />
+    <meta name='360-fullscreen' content='true' />
+    <title>预测你容易得哪方面疾病</title>
+    <!--[if lt IE 9]>  
+        <script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+        <script src="https://cdn.bootcss.com/respond.__PUBLIC__/js/1.4.2/respond.min.js"></script>    
+    <![endif]-->
+    <link rel="stylesheet" href="__PUBLIC__/css/public_zm.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/YD_calendar.min.css">
+
+    <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_"+<!--{$channelID}-->+"'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D"+<!--{$channelID}-->+"' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <script src="__PUBLIC__/js/rem.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/layer_mobile/layer.js"></script>
+    <script src="__PUBLIC__/js/YD_calendar.min.js"></script>
+    <style>
+        body{background-color:#F9E0CD;}
+        .img_box{font-size:0;position: relative;}
+        .img_box img{vertical-align: middle;}
+        .leftm20{margin:0.2rem 0.2rem 0.2rem 0;}
+        .rightm20{margin:0.2rem 0 0.2rem 0.2rem;}
+        .rm18{margin-right:0.18rem;}
+        .fiex_bt{
+            height:0.8rem;
+            line-height: 0.8rem;
+            display: block;
+            margin:0.1rem 0.2rem 0.1rem;
+        }
+        .jk_gif{
+            position: absolute;
+            padding:0.2rem;
+            width:100%;
+            box-sizing:border-box;
+            top:0;
+            left:0;
+        }
+        #video{
+            position: absolute;
+            padding:0.2rem;
+            width:100%;
+            box-sizing:border-box;
+            top:0;
+            left:0;
+        }
+        
+        /* 表单 */
+        .m_form_wrap{position: relative;margin:0.6rem 0.2rem 0.32rem;;}
+        .m_form_title{
+            width:3.7rem;
+            font-size:0.32rem;
+            color:#333333;
+            height:0.72rem;
+            line-height: 0.72rem;
+            text-align: center;
+            background:url('__PUBLIC__/images/jktest/ycjb_ziliao.png') 0% 0% /100% 100% no-repeat;
+            position: absolute;
+            top:-0.36rem;
+            left:50%;
+            margin-lefT:-1.85rem;
+        }
+        .m_form_ul{border:1px solid #FD9266;padding-top:0.4rem;background-color:#FFFFFF;}
+        .m_form_ul li{margin-bottom:0;border:none;border-radius:0;border-bottom: 1px solid #bd9382;}
+        .m_form_btnwrap{border-radius:0.7rem;font-weight:bold;}
+        /* 悬浮按钮 */
+        .public_sus_container{
+            position: fixed;
+            left:0;
+            bottom:0;
+            width: 100%;
+            display: none;
+            z-index: 40;        
+        }
+        .public_sus_container .public_sus_content{
+            overflow: hidden;
+            width: 100%;
+            height:1rem;
+            line-height: 1rem;
+            background-color:rgba(0, 0, 0, 0.5);
+        }
+        /* menu */
+        /* .public_menu_container{
+            position: fixed;
+            right:0.1rem;
+            bottom:1.8rem;
+        }
+        .public_menu_content{
+            display: flex;
+            flex-direction: column;
+            height:1.8rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .public_menu_content .navigate{
+            display:block;
+            width:0.8rem;
+            height:0.8rem;
+            border-radius: 50%;
+            padding:0;
+        }
+        .public_menu_content .navigate:nth-child(1){
+            background:url('__PUBLIC__/images/public/home.png') center center no-repeat rgba(0, 0, 0, 0.5);
+            background-size:0.48rem;
+        }
+        .public_menu_content .navigate:nth-child(2){
+            background:url('__PUBLIC__/images/public/my.png') center center no-repeat rgba(0, 0, 0, 0.5);
+            background-size:0.48rem;
+        } */
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <include file="Public/public_zm_header"/>
+    <div class="public_banner">
+        <img src="__PUBLIC__/images/jktest/ycjb_banner.png" width="100%" alt="">
+    </div>
+    <div class="public_banner leftm20" id="scrollT">
+        <img src="__PUBLIC__/images/jktest/ycjb_yiyi.png" width="100%" alt="">
+    </div>
+    <!-- main -->
+    <main class="test_content">
+        <div class="m_form_container">
+            <form id="m_form" action="<!--{:U('Paycs/paypage','',false)}-->" method="POST" id="frm">
+                <div class="m_form_wrap">
+                    <div class="m_form_title">请填写您的登记资料</div>
+                    <ul class="m_form_ul">
+                        <li>
+                            <div class="f_left">您的姓名</div>
+                            <div class="f_auto"><input type="text" id="username" name="username" placeholder="匿名 (可不填)"></div>
+                        </li>
+                        <li>
+                            <div class="f_left">您的性别</div>
+                            <div class="f_auto">
+                                <label for="man">
+                                    <input type="radio" name="gender" checked="checked" style="display: none" id="man" value="1">
+                                    <span class="select"></span>
+                                    <span class="sex_t">男</span>
+                                </label>
+                                <label for="woman">
+                                    <input type="radio" name="gender" style="display: none" id="woman" value="0">
+                                    <span class="select"></span>
+                                    <span class="sex_t">女</span> 
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="f_left">出生日期</div>
+                            <div class="f_auto"><input type="text" data-date="1985-04-18-7" data-id="birthday" id="datetime" readonly="true" placeholder="请选择出生日期"></div>
+                            <input type="hidden" id="birthday" name="birthday">
+                        </li>
+                    </ul>
+                </div>
+                <div class="m_form_btnwrap J_formSubmit">立即检测身体问题</div>
+                <p class="m_form_prompt">目前已有<span><!--{$clickTJ}-->人</span>申请检测</p>
+            </form>
+        </div>
+        <div class="img_container">
+            <div class="img_box rightm20">
+                <img src="__PUBLIC__/images/jktest/ycjb_smkg1.png" width="100%" alt="">
+                <div class="img_box rm18">
+                    <img src="__PUBLIC__/images/jktest/ycjb_smkg0.png" width="100%" alt="">
+                    <!-- 视频 -->
+                    <video id="video" controls="controls" width="vdBox" webkit-playsinline="true" x-webkit-airplay="true"  playsinline="true" poster="__PUBLIC__/images/jktest/poster.png" x5-video-player-type="h5" x5-video-player-fullscreen="true">
+                        您的浏览器不支持 video 标签。
+                        <source src="__PUBLIC__/images/jktest/jkvideo.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="img_box rm18">
+                    <img src="__PUBLIC__/images/jktest/ycjb_smkg3.png" width="100%" alt="">
+                </div>
+            </div>
+            <div class="img_box leftm20"><img src="__PUBLIC__/images/jktest/ycjb_zyjc.png" width="100%" alt=""></div>
+            <div class="img_box rightm20">
+                <div class="img_box">
+                    <img src="__PUBLIC__/images/jktest/ycjb_zuanjia1.png" width="100%" alt="">
+                </div>
+                <div class="img_box rm18">
+                    <img src="__PUBLIC__/images/jktest/ycjb_zuanjia2.png" width="100%" alt="">
+                </div>
+                <div class="img_box rm18">
+                    <img src="__PUBLIC__/images/jktest/ycjb_zuanjia3.png" width="100%" alt="">
+                </div>
+            </div>
+            <div class="img_box rightm20"><img src="__PUBLIC__/images/jktest/ycjb_yhpl.png" width="100%" alt=""></div>
+            <div class="img_box leftm20"><img src="__PUBLIC__/images/jktest/ycjb_ycsm.png" width="100%" alt=""></div>
+        </div>
+    </main>
+    
+    <include file="Public/public_zm_foot"/>
+    <!-- 悬浮Home -->
+    <!-- <aside class="public_menu_container">
+        <div class="public_menu_content">
+            <a href="" class="navigate"></a>
+            <a href="" class="navigate"></a>
+        </div>
+    </aside> -->
+    <!-- 悬浮按钮 -->
+    <aside class="public_sus_container">
+        <div class="public_sus_content">
+            <a href="javascript:;" class="m_form_btnwrap fiex_bt">立即检测身体问题</a>
+        </div>
+    </aside>
+    <script>
+        // 第一帧作为缩略图
+        // window.onload = function () {
+        //     var video;//video标签
+        //     var scale = 0.8;//第一帧图片与源视频的比例
+        //     video = $("#video").get(0);//赋值标签
+        //     video.addEventListener('loadeddata',function(){
+        //         var canvas = document.createElement("canvas");//canvas画布
+        //         canvas.width = video.videoWidth * scale;
+        //         canvas.height = video.videoHeight * scale;
+        //         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);//画图
+        //         console.log(video.poster)
+        //         video.poster = canvas.toDataURL("image/png");
+        //         console.log(video.poster)
+        //     })
+        // }
+        window.history.pushState('',null,'');
+        window.addEventListener('popstate',function(){
+            window.location.href = "<!--{:U('Index/index','',false)}-->";
+        })
+        
+        new lCalendar().init('#datetime');//男
+
+        $(".J_formSubmit").on('click',function(){
+            $.getJSON("<!--{:U('Paycs/index_cs','',false)}-->",function(data){});//提交按钮统计
+
+            if($("[name='username']").val() == ""){
+                $("[name='username']").val('匿名');
+            }else if($("[name='username']").val().length < 2){
+                layer.open({
+                    content: '姓名长度不能少于2'
+                    ,skin: 'msg'
+                    ,time: 2
+                });
+                return false;
+            }
+            var patrn= /[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
+            if(!patrn.exec($("[name='username']").val())){
+                layer.open({
+                    content: '请输入中文名字'
+                    ,skin: 'msg'
+                    ,time: 2
+                });
+                return false;
+            }
+            if($("[name='birthday']").val() == ""){
+                layer.open({
+                    content: '请选择生时'
+                    ,skin: 'msg'
+                    ,time: 2
+                });
+                return false;
+            }
+
+            var birthday=$("[name='birthday']").val();
+            var username=$("[name='username']").val();
+            var gender=$("[name='gender']").val();
+            if(!birthday||!username||!gender){
+                layer.open({
+                    content: '请重新提交信息'
+                    ,skin: 'msg'
+                    ,time: 2
+                });
+                return false;
+            }
+            layer.open({
+                type: 2
+                ,content: '加载中'
+                ,time: 2
+                ,end(){
+                    $('#m_form').submit();
+                }
+            });
+        });
+
+        //测算底部悬浮
+        $(function(){
+            var topShow=$(".J_formSubmit");
+            if(topShow.length){
+                var topShow=topShow.offset().top;
+                var testBtn=$(".public_sus_container");
+                $(window).scroll(function(){
+                    var wt=$(window).scrollTop();
+                    wt>topShow?(testBtn.fadeIn(),$('.public_fonter_container').css('padding-bottom','1rem')):(testBtn.fadeOut(),$('.public_fonter_container').css('padding-bottom','0.4rem'));
+                });
+                // goTop
+                $('.public_sus_container').on('click',function(){$('html,body').animate({scrollTop:$('#scrollT')[0].offsetTop},500)});
+            }
+        });
+        
+
+    </script>
+</body>
+</html>

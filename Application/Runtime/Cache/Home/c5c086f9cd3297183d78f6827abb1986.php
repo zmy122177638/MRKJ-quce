@@ -132,12 +132,10 @@
 					$.get("<?php echo U('Index/mytest_free','',false);?>",{page:_self.Hotpage},function(data){
 						var data = JSON.parse(data);
 						_self.HottestData = data;
-						console.log(_self.HottestData)
 					});
 					$.get("<?php echo U('Index/mytest_pay','',false);?>",{page:_self.NewPage},function(data){
 						var data = JSON.parse(data);
 						_self.NewesttData = data;
-						console.log(_self.NewesttData)
 					});
 				}, 
 				// loadplugin
@@ -185,7 +183,6 @@
 									_self.Hotpage++;
 									$.get("<?php echo U('Index/indexAnswer','',false);?>",{page:_self.Hotpage},function(data){
 										var data = JSON.parse(data);
-										console.log(data[0].page)
 										if(data[0].content != undefined){
 											data.forEach(function (item){
 												_self.HottestData.push(item)
@@ -206,7 +203,6 @@
 									_self.NewPage++;
 									$.get("<?php echo U('Index/mytest_pay','',false);?>",{page:_self.NewPage},function(data){
 										var data = JSON.parse(data);
-										console.log(data[0].page)
 										if(data[0].content != undefined){
 											data.forEach(function (item){
 												_self.NewesttData.push(item)
@@ -273,16 +269,16 @@
         var serData=1;
         if(ordernum){
             var intrval= setInterval(function(){
-                $.getJSON("<?php echo U('Index/selectOrder','',false);?>?ordernum="+ordernum,{number:1},function(data){
+                $.getJSON("<?php echo U('Index/selectLoop','',false);?>",{number:1,ordernum:ordernum},function(data){
                     serData++;
                    if(data==1){
                        location.href="<?php echo U('Paycs/jieguoye','',false);?>?orderid="+ordernum;
                    }
-                    if(serData>30){
+                    if(serData>80){
                         clearInterval(intrval);
                     }
                 });
-            },5000);
+            },4000);
         }
 
 	</script>

@@ -260,7 +260,7 @@
             <img src="/quce/Public/images/QR_core.png" width="30%" class="public_QRicon" alt="">
             <p>长按二维码添加客服微信</p><?php endif; ?>
         <p>在线服务时间：周一至周五9:00-18:00</p>
-        <p><small>(以上测试纯属测试本身，不作为证明任何人财商能力的依据)</small></p>
+        <p><small>(以上测试纯属测试本身，不作为证明任何人能力的依据)</small></p>
     </div>
 </footer>
     
@@ -274,7 +274,7 @@
     <!-- 悬浮按钮 -->
     <div class="public_sus_container">
         <div class="public_sus_content">
-            <a  class="public_test_btn">立即测算</a>
+            <a href="javascript:;" class="public_test_btn">立即测算</a>
         </div>
     </div>
     <script>

@@ -1,0 +1,262 @@
+
+<!-- header -->
+<style>
+    /* 新改头部 */
+  .omd_header{
+      height: 1rem;
+      line-height: 1rem;
+      overflow: hidden;
+      background-color:#ffffff;
+  }
+  .omd_back{
+      width:1rem;
+      height: 1rem;
+      float: left;
+      background:url('__PUBLIC__/images/public/goHome.png') center no-repeat;
+      background-size:0.48rem;;
+  }
+  .omd_home{
+      color:#de2126;
+      font-size:0.3rem;
+      position: relative;
+      display: inline-block;
+      font-weight: bold;
+  }
+  .jiantou{
+    display: inline-block;
+    width:0.17rem;
+    height:0.3rem;
+    vertical-align: middle;
+    background:url('__PUBLIC__/images/public/more.png')  no-repeat;
+    background-size:100% 100%;
+  }
+  .omd_title{
+      font-size:0.3rem;
+      color:#666666;  
+      position: relative;
+      display: inline-block;
+  }
+  .omd_menu{
+      float:right;
+      width:1rem;
+      height: 1rem;   
+      background:url('__PUBLIC__/images/public/menu.png') center no-repeat;
+      background-size:0.52rem;;
+  }
+  .omd_order{
+      float:right;
+      width:1rem;
+      height: 1rem;   
+      background:url('__PUBLIC__/images/public/mytest.png') center no-repeat;
+      background-size:0.52rem;
+  }
+  /* omd_menu */
+  .omd_menu_container{
+    height:calc(100Vh - 1rem);
+    width:100%;
+    position: fixed;
+    left:0;
+    right: 0;
+    bottom:0;
+    border-top:2px solid #eeeeee;
+    box-sizing: border-box;
+    background-color:rgba(255,255,255,0.9);
+    display: none;
+    transform: translate3d(0,0,0);
+    z-index: 99;
+  }
+  .omd_menu_container.on{
+    display: block;
+    opacity: 1;
+  }
+  .omd_menu_container.menuShow{
+    animation: menuin 0.3s forwards ease-out;
+    -webkit-animation: menuin 0.3s forwards ease-out;
+  }
+  .omd_menu_container.menuHidden{
+    animation: menuOut 0.3s forwards ease-out;
+    -webkit-animation: menuOut 0.3s forwards ease-out;
+  }
+  @keyframes menuin{
+    0%{
+      transform: scale(3);
+      -webkit-transform: scale(3);
+      -ms-transform: scale(3);
+      -moz-transform: scale(3);
+      opacity: 0;
+    }
+    100%{
+      transform: scale(1);
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      -moz-transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes menuOut{
+    0%{
+      transform: scale(1);
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      -moz-transform: scale(1);
+      opacity: 1;
+    }
+    100%{
+      transform: scale(3);
+      -webkit-transform: scale(3);
+      -ms-transform: scale(3);
+      -moz-transform: scale(3);
+      opacity: 0;
+    }
+  }
+  .omd_menu_wrap{
+    margin:0 0.3rem;
+  }
+  .omd_menu_ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+  .omd_menu_li{
+    width:calc(100% / 3);
+    margin-top:0.4rem;
+  }
+  .omd_menu_a{
+    display: block;
+  }
+  .omd_menu_a figure img{
+    width:1.3rem;
+    height:1.3rem;
+    vertical-align: middle;
+    display: block;
+    margin:0 auto;
+  }
+  .omd_menu_a p{
+    font-size:0.36rem;
+    color:#333333;
+    text-align: center;
+    line-height: 1.7;
+  }
+  </style>
+  <!-- 头部 -->
+  <header class="omd_header">
+      <a href="<!--{:U('Index/index','',false)}-->" class="omd_back"></a>
+      <a href="<!--{:U('Index/index','',false)}-->" class="omd_home">测算大全</a>
+      <span class="jiantou"></span>
+      <span class="omd_title"><!--{$Think.cookie.titleName}--></span>
+      <span class="omd_menu"></span>
+      <a href="<!--{:U('Index/mytest','',false)}-->" class="omd_order"></a>
+  </header>
+  <!-- menu菜单 -->
+  <aside class="omd_menu_container">
+    <div class="omd_menu_wrap">
+      <ul class="omd_menu_ul">
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-lnyc-index" class="omd_menu_a">
+            <figure><img src="http://qiniu.ddznzj.com/media/180817/180817174139931.png" alt=""></figure>
+            <p>2018运势</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-bzjp-index" class="omd_menu_a">
+            <figure><img src="http://qiniu.ddznzj.com/media/180817/180817174200502.png" alt=""></figure>
+            <p>八字精批</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-bzsy-index" class="omd_menu_a">
+            <figure><img src="http://qiniu.ddznzj.com/media/180817/180817174511370.png" alt=""></figure>
+            <p>事业运势</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-szjx-index" class="omd_menu_a">
+            <figure><img src="http://qiniu.ddznzj.com/media/180817/180817174524905.png" alt=""></figure>
+            <p>数字解析</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-xmcs-index" class="omd_menu_a">
+            <figure><img src="http://qiniu.ddznzj.com/media/180817/180817174547665.png" alt=""></figure>
+            <p>姓名详批</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-bzcy-index" class="omd_menu_a">
+            <figure><img src="http://qiniu.ddznzj.com/media/180817/180817174607455.png" alt=""></figure>
+            <p>八字财运</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-Lnyc2019-index" class="omd_menu_a">
+            <figure><img src="__PUBLIC__/images/public/menu_01.png" alt=""></figure>
+            <p>2019年运势</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-hyzs-index" class="omd_menu_a">
+            <figure><img src="http://qiniu.ddznzj.com/media/180817/180817174614741.png" alt=""></figure>
+            <p>婚缘走势</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-bzhh-index" class="omd_menu_a">
+            <figure><img src="http://qiniu.ddznzj.com/media/180817/180817174148357.png" alt=""></figure>
+            <p>八字合婚</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-bzhh-index" class="omd_menu_a">
+            <figure><img src="__PUBLIC__/images/public/menu_02.png" alt=""></figure>
+            <p>宝宝起名</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-lath-index" class="omd_menu_a">
+            <figure><img src="__PUBLIC__/images/public/menu_03.png" alt=""></figure>
+            <p>恋爱桃花运</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-xzcs-index" class="omd_menu_a">
+            <figure><img src="__PUBLIC__/images/public/menu_04.png" alt=""></figure>
+            <p>星盘测算</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-pfc-index" class="omd_menu_a">
+            <figure><img src="__PUBLIC__/images/public/menu_05.png" alt=""></figure>
+            <p>选吉日</p>
+          </a>
+        </li>
+        <li class="omd_menu_li">
+          <a href="http://www.yixueqm.com/zhiming/index.php/home-zwds-index" class="omd_menu_a">
+            <figure><img src="__PUBLIC__/images/public/menu_06.png" alt=""></figure>
+            <p>一生运势</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <script>
+    // $().ready(function(){
+    //   var isHome = "<!--{$titleName['number']}-->";
+    //   if(isHome == '1'){
+    //     $('.omd_menu').show();
+    //     $('.myOrderNav').show();
+    //     $('.omd_order').show();
+    //   }
+    // });
+    $('.omd_menu').on('click',function(){
+      var $node = $('.omd_menu_container');
+      $('.omd_menu_container').addClass('on');
+      $('.omd_menu_container').toggleClass('menuShow');
+      if(!$('.omd_menu_container').hasClass('menuShow')){
+        $('.omd_menu_container').addClass('menuHidden');
+        setTimeout(function(){
+          $('.omd_menu_container').removeClass('menuHidden');
+          $('.omd_menu_container').removeClass('on');
+        },300)
+      }
+    })
+  </script>

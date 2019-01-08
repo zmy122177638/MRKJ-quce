@@ -48,5 +48,18 @@ function cnzz_pvuv($name){//pV uV  统计
         M()->query("update qc_cnzz_pvuv set uv='{$cnzzArr[0]['uv']}'+1 where id='{$cnzzArr[0]['id']}'");
         cookie($UvName,1,$timedata);
     }
+}
 
+function judgeData($Arr,$request=null){//判断是否有参数
+    foreach($Arr as $key=>$value){
+        if($value==='0'||$value===0){
+            $value=1;
+        }
+        if(empty($value)){
+            echo '缺少参数';
+            echo $key;
+            dump($request);
+            exit;
+        }
+    }
 }

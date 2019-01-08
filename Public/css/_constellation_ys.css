@@ -46,6 +46,7 @@ body{
 }
 /* 今日星座运势 */
 .result_ys_container{
+	background-color:#ffffff;
     padding:0.1rem;
     display: none;
 }

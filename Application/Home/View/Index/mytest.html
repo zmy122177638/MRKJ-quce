@@ -262,16 +262,16 @@
         var serData=1;
         if(ordernum){
             var intrval= setInterval(function(){
-                $.getJSON("<!--{:U('Index/selectOrder','',false)}-->?ordernum="+ordernum,{number:1},function(data){
+                $.getJSON("<!--{:U('Index/selectLoop','',false)}-->",{number:1,ordernum:ordernum},function(data){
                     serData++;
                    if(data==1){
                        location.href="<!--{:U('Paycs/jieguoye','',false)}-->?orderid="+ordernum;
                    }
-                    if(serData>30){
+                    if(serData>80){
                         clearInterval(intrval);
                     }
                 });
-            },5000);
+            },4000);
         }
 
 	</script>

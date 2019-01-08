@@ -274,6 +274,16 @@
                 }
             );
         }
+
+        $('.seeBtn').on('click',function(){
+            //点击回调入库
+            $.getJSON("<?php echo U('Paycs/zhifu_tj','',false);?>",function(data){});
+        });
+        $('.back_popup_Btn').on('click',function(){
+            //点击回调入库
+            $.getJSON("<?php echo U('Paycs/zhifu_return','',false);?>",function(data){});
+        });
+
         // 计时
         new AnlesPlugin.countDownUp({
             setHDTime:86400,

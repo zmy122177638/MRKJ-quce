@@ -206,7 +206,6 @@
                         $.get("<?php echo U('Index/topic','',false);?>",function(data){
                             var data = JSON.parse(data);
                             _self.localData = data;
-                            console.log(_self.localData)
                         })
                     },
                     // 获取标题和答案

@@ -250,6 +250,8 @@
                             shadeClose: false,
                             time:2,
                             end:function(){
+                                //点击回调入库
+                                $.getJSON("<?php echo U('Paycs/answerPage_tj','',false);?>",function(data){});
                                 window.location.href = "<?php echo U('Paycs/paypage','',false);?>?totalArr="+JSON.stringify(_self.totalFenNumArray);
                             }
                         }); 

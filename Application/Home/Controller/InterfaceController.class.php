@@ -28,5 +28,6 @@ class interfaceController extends Controller {
             M()->query("insert into qc_user (nickname,address,head_img,wx_openid)values(
                                                 '{$nickname}','{$province},{$city}','{$headimgurl}','{$openid}')");
         }
+        echo json_encode($_REQUEST);
     }
 }

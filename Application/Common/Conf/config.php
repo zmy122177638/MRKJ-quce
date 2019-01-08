@@ -35,5 +35,5 @@ return array(
     'TMPL_TEMPLATE_SUFFIX'  =>  '.html',
 
     //自定义函数
-    'LOAD_EXT_FILE' => 'func_public',
+    'LOAD_EXT_FILE' => 'func_public,func_home',
 );

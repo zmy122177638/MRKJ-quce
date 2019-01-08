@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- 去除浏览器地址栏和菜单栏 -->
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='full-screen' content='true' />
+    <meta name='x5-fullscreen' content='true' />
+    <meta name='360-fullscreen' content='true' />
+    <title>预测你容易得哪方面疾病</title>
+	<!--[if lt IE 9]>  
+		<script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+		<script src="https://cdn.bootcss.com/respond.__PUBLIC__/js/1.4.2/respond.min.js"></script>    
+    <![endif]-->
+    <link rel="stylesheet" href="__PUBLIC__/css/public_zm.css">
+    <script src="__PUBLIC__/js/rem.js"></script>
+    <script src="__PUBLIC__/js/vue.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/js/echarts.min.js"></script>
+    <style>
+        .order_top_info{font-size:0.28rem;color: #989898;text-align: center;padding:0.2rem;background-color:#ffffff;}
+        /* shenti */
+        .result_container{background-color:#F9E0CD;overflow: hidden;}
+        .result_box{
+            margin:0.2rem;
+            padding:0.2rem;
+            background-color:#ffffff;
+            border:1px solid #FD9266;
+            border-radius: 0.12rem;
+        }
+        .result_title_img{width:4.07rem;height:0.47rem;vertical-align: middle;}
+        .result_content_title{
+            text-align: center;
+            margin:0.2rem 0 0.6rem;;
+        }
+        .result_c_ul{
+            list-style: none;
+        }
+        .result_c_li{
+            font-size:0.3rem;
+            line-height: 1.6;
+            margin-bottom:0.3rem;
+        }
+        .result_li_title{
+            color:#8F0808;
+            font-size:0.3rem;
+            font-weight:bold;
+            
+        }
+        .result_li_c{
+            color:#333333;
+        }
+        .result_tz_name{
+            font-size:0.58rem;
+            color:#8F0808;
+            text-align: center;
+            margin-bottom:0.6rem;
+            font-family: '楷体';
+        }
+        .result_tz_zd{
+            width:3.6rem;
+            height:0.7rem;
+            line-height:0.7rem;
+            text-align: center;
+            font-size:0.36rem;
+            color:#333333;
+            margin:0 auto 0.4rem;
+            background:url('__PUBLIC__/images/jktest/duankuang.png') 0% 0% /100% 100% no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <include file="Public/public_zm_header"/>
+    <div id="app">
+        <div class="result_container">
+            <div class="order_top_info">订单号：{{order}}<span></span></div>
+            <div class="result_content">
+                <div class="result_box">
+                    <h3 class="result_content_title"><img src="__PUBLIC__/images/jktest/jgy_csjg.png" class="result_title_img" alt=""></h3>
+                    <ul class="result_c_ul">
+                        <li class="result_c_li" v-for="item in listDate">
+                            <h4 class="result_li_title">{{item.title}}:</h4>
+                            <p class="result_li_c">{{item.text}}</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="result_box">
+                    <h3 class="result_content_title"><img src="__PUBLIC__/images/jktest/jgy_tzpx.png" class="result_title_img" alt=""></h3>
+                    <h4 class="result_tz_name">{{tiziName}}</h4>
+                    <h5 class="result_tz_zd">药膳指导</h5>
+                    <ul class="result_c_ul">
+                        <li class="result_c_li" v-for="item in yaoshan">
+                            <h4 class="result_li_title">{{item.title}}:</h4>
+                            <p class="result_li_c">{{item.text}}</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="result_box">
+                    <h3 class="result_content_title"><img src="__PUBLIC__/images/jktest/jgy_pcbg.png" class="result_title_img" alt=""></h3>
+                    <ul class="result_c_ul">
+                        <li class="result_c_li" v-for="item in ziwei">
+                            <h4 class="result_li_title">{{item.title}}:</h4>
+                            <p class="result_li_c">{{item.text}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- footer -->
+            <include file="Public/public_zm_foot"/>
+        </div>
+        
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                order:'',
+                listDate:[],
+                tiziName:'',
+                yaoshan:[],
+                ziwei:[]
+
+            },
+            mounted() {
+                this.ajaxData();
+            },
+            methods:{
+                ajaxData(){
+                    var _self = this;
+                    $.post("<!--{:U('Paycs/jieguoyeJson','',false)}--> ",function(data){
+                        var result = JSON.parse(data);
+                        _self.listDate = result.data;
+                        _self.order = result.orderid;
+                        _self.tiziName = result.name;
+                        _self.yaoshan = result.yaoshan;
+                        _self.ziwei = result.ziwei;
+                        console.log(result)
+                        // _self.$nextTick(function(){_self.echartsInit();})
+                    })
+                },
+            //     echartsInit(){
+            //         var _self  = this;
+            //         let radar_eachart = echarts.init(document.getElementById('radar_eachart'));
+            //         let option3 = {
+            //             color: ['#FF5500'],
+            //             title:{
+            //                 text:'情商分能力模型',
+            //                 left:'50%',
+            //                 top:'5%',
+            //                 textAlign:'center'
+            //             },
+            //             tooltip : {
+            //                 trigger: 'axis',
+            //             },
+            //             radar: [
+            //                 {
+            //                     indicator: [
+            //                         {text: '管理别人的能力', max: 10,color:'#333333'},
+            //                         {text: '认识自己的能力', max: 10,color:'#333333'},
+            //                         {text: '激励自己的能力', max: 10,color:'#333333'},
+            //                         {text: '管理自己的能力', max: 10,color:'#333333'},
+            //                         {text: '认识别人的能力', max: 10,color:'#333333'}
+            //                     ],
+            //                     center: ['50%','58%'],
+            //                     radius:60,
+            //                 },
+            //             ],
+            //             series : [
+            //                 {
+            //                     type: 'radar',
+            //                     tooltip: {
+            //                         trigger: 'item'
+            //                     },
+            //                     itemStyle: {normal: {areaStyle: {type: 'default'}}},
+            //                     data: [
+            //                         {
+            //                             value: [_self.result.glbr.fraction,_self.result.rszj.fraction,_self.result.jlzj.fraction,_self.result.glzj.fraction,_self.result.rsbr.fraction],
+            //                             name: '情商能力'
+            //                         }
+            //                     ]
+            //                 },
+            //             ]
+            //         };
+            //         radar_eachart.setOption(option3)
+            //     }
+            // }
+            }
+        })
+        window.history.pushState(null,null,location.href);
+        window.addEventListener('popstate',function(){
+            window.location.href="<!--{:U('Index/mytest','',false)}-->"
+        })
+    </script>
+</body>
+</html>
